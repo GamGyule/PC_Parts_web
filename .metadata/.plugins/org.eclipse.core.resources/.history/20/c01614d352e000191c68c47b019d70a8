@@ -1,0 +1,100 @@
+/*new Thread() {
+				@Override
+				public void run() {
+					mailsender.SendMail(req, cid, cmail, cauth);
+				}
+			}.start();*/
+
+	/*@Autowired
+	private UserMailSendService mailsender;*/
+
+
+	/*<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" /><!-- 465 or 25 -->
+		<beans:property name="username" value="硫붿씪" />
+		<beans:property name="password" value="鍮꾨�踰덊샇" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>*/
+
+
+package com.pc.parts.util;
+
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserMailSendService {
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	// �씠硫붿씪 �궃�닔 留뚮뱶�뒗 硫붿냼�뱶
+	private String init() {
+		Random ran = new Random();
+		StringBuffer sb = new StringBuffer();
+		int num = 0;
+
+		do {
+			num = ran.nextInt(75) + 48;
+			if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+				sb.append((char) num);
+			} else {
+				continue;
+			}
+
+		} while (sb.length() < size);
+		if (lowerCheck) {
+			return sb.toString().toLowerCase();
+		}
+		return sb.toString();
+	}
+
+	// �궃�닔瑜� �씠�슜�븳 �궎 �깮�꽦
+	private boolean lowerCheck;
+	private int size;
+	
+	public String getKey(boolean lowerCheck, int size) {
+		this.lowerCheck = lowerCheck;
+		this.size = size;
+		return init();
+	}
+	
+	String ip = "http://192.168.35.2:8080/gams";
+	//String ip = "http://gams.ga";
+	public void SendMail(HttpServletRequest req, String cid, String cmail, String cauth) {
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = "<h2>"+cid+"고객님 어쩌구~~~</h2><br><br>";
+		
+		try {
+			mail.setSubject("[GAMGYUL] "+cid+"호갱님","utf-8");
+			mail.setText(htmlStr,"utf-8","html");
+			mail.addRecipient(RecipientType.TO,new InternetAddress(cmail));
+			mailSender.send(mail);
+		}catch(MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int alter_userKey_service(String cid, String cauth) {
+		int resultCnt = 0;
+		return resultCnt;
+	}
+}
