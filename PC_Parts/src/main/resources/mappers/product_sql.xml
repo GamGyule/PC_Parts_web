@@ -9,7 +9,7 @@
 	<!-- <select id="getAll" resultType="com.gamgyul.gams.dto.CustomerDTO">
 		select * from customer
 	</select> -->
-	<insert id="notiInsert" parameterType="Noti">
+	<insert id="notiInsert" parameterType="com.pc.parts.dto.NotiDTO">
 	insert into values(
 		#{idx},
 		#{from_co},
@@ -19,7 +19,7 @@
 		)
 	
 	</insert>
-	    <select id="notiSelectAll" resultType="Noti">
-        select * from login
+	    <select id="notiSelectAll" resultType="com.pc.parts.dto.NotiDTO">
+        select * from noti
     </select>
 </mapper>

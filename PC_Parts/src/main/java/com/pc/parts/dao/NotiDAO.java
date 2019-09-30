@@ -2,9 +2,9 @@ package com.pc.parts.dao;
 
 import java.util.List;
 
-import com.pc.parts.dto.noti_dto;
+import com.pc.parts.dto.NotiDTO;
 
 public interface NotiDAO {
-	public void NotiInsert(noti_dto noti);
-	public List<noti_dto> selectNoti();
+	public void NotiInsert(NotiDTO noti);
+	public List<NotiDTO> selectNoti();
 }

@@ -5,12 +5,9 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName"
-			value="org.mariadb.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mariadb://10.50.208.50:3306/compuzone" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mariadb://10.50.208.50:3306/compuzone" />
 		<property name="username" value="zzzzzzzs" />
 		<property name="password" value="1111" />
 	</bean>
@@ -27,4 +24,6 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
+	
 </beans>

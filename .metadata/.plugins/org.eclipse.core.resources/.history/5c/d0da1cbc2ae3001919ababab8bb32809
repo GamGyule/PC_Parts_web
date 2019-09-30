@@ -1,0 +1,37 @@
+package com.pc.parts;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.pc.parts.dao.NotiDAOMyBatis;
+import com.pc.parts.dto.noti_dto;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+	
+	@Autowired
+	NotiDAOMyBatis notidao;
+	
+	@RequestMapping("/")
+	public String Index(Model model) {
+		
+		  List<noti_dto> noti_list = (List<noti_dto>) notidao.selectNoti();
+		  
+		  model.addAttribute("noti",noti_list);
+		  
+		  System.out.println(noti_list.size());
+		 
+		
+		return "index";
+	}
+	
+	
+	
+}

@@ -1,0 +1,22 @@
+package com.pc.parts;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+	
+	@Autowired
+	NotiDAOMyBatis notidao;
+	
+	@RequestMapping("/")
+	public String Index() {
+		return "index";
+	}
+	
+	
+	
+}

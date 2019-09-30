@@ -12,4 +12,7 @@
 	<!-- <typeAliases>
 		<typeAlias type="com.gamgyul.gams.dto.CustomerDTO"></typeAlias>
 	</typeAliases> -->
+	<typeAliases>
+		<typeAlias type="com.pc.parts.dto.NotiDTO"></typeAlias>
+	</typeAliases>
 </configuration>
