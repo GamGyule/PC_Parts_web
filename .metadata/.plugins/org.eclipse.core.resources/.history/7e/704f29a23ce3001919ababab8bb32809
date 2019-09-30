@@ -1,0 +1,127 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="com.pc.parts.dto.NotiDTO,java.util.List"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto&display=swap" rel="stylesheet">
+<style>
+
+html,body{
+	font-family: 'Nanum Gothic', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+}
+
+li {
+	height: 50px;
+    line-height: 50px;
+	width: 150px;
+	text-align: center;
+}
+
+li:hover {
+	cursor: pointer;
+	background-color: #eeeeee;
+}
+
+
+
+
+.hexagon {
+  position: relative;
+  display: inline-block;
+  width: 150px; 
+  height: 86.60px;
+  margin: 43.30px 0;
+  background-color:red;
+  background-size: auto 173.2051px;
+  background-position: center;
+}
+
+.hexTop,
+.hexBottom {
+  position: absolute;
+  z-index: 1;
+  width: 106.07px;
+  height: 106.07px;
+  overflow: hidden;
+  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+  -ms-transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
+  background: inherit;
+  left: 21.97px;
+}
+
+/*counter transform the bg image on the caps*/
+.hexTop:after,
+.hexBottom:after {
+  content: "";
+  position: absolute;
+  width: 150.0000px;
+  height: 86.60254037844388px;
+  -webkit-transform:  rotate(45deg) scaleY(1.7321) translateY(-43.3013px);
+  -ms-transform:      rotate(45deg) scaleY(1.7321) translateY(-43.3013px);
+  transform:          rotate(45deg) scaleY(1.7321) translateY(-43.3013px);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  background: inherit;
+}
+
+.hexTop {
+  top: -53.0330px;
+}
+
+.hexTop:after {
+  background-position: center top;
+}
+
+.hexBottom {
+  bottom: -53.0330px;
+}
+
+.hexBottom:after {
+  background-position: center bottom;
+}
+
+.hexagon:after {
+  content: "";
+  position: absolute;
+  top: 0.0000px;
+  left: 0;
+  width: 150.0000px;
+  height: 86.6025px;
+  z-index: 2;
+  background: inherit;
+}
+</style>
+<meta charset="UTF-8">
+<title>관리하자</title>
+</head>
+<%
+	int noti_cnt = 0;
+	List<NotiDTO> noti_list = null;
+	if (request.getAttribute("noti_list") != null) {
+		noti_list = (List<NotiDTO>) request.getAttribute("noti_list");
+	}
+%>
+<body style="margin: 0; padding: 0;">
+	<div style="height: 50px; line-height: 50px; width: 100%;">
+		헤더헤더헤더헤더
+	</div>
+	<div class="container" style="display: inline-block;">
+		<div style="float: left; height: 100%; display: inline-block;">
+			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 100%;">
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+			</ul>
+		</div>
+		<div class="hexagon">
+			<div class="hexTop"></div>
+			<div class="hexBottom"></div>
+		</div></body>
+</html>

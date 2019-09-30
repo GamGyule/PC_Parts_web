@@ -6,59 +6,69 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto&display=swap" rel="stylesheet">
 <style>
-
-html,body{
+html, body {
 	font-family: 'Nanum Gothic', sans-serif;
 	font-family: 'Roboto', sans-serif;
-}
-
-#hexagon {
-    width: 90px;
-    height: 55px;
-    background: antiquewhite;
-    position: relative;
-    text-align: center;
-    transform: rotate(90deg);
-}
-
-#hexagon:before {
-	content: "";
-    position: absolute;
-    top: -25px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 45px solid transparent;
-    border-right: 45px solid transparent;
-    border-bottom: 25px solid antiquewhite;
-}
-
-#hexagon:after {
-	content: "";
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 45px solid transparent;
-    border-right: 45px solid transparent;
-    border-top: 25px solid antiquewhite;
+	font-size: 24px;
 }
 
 li {
-	height: 34px;
-	line-height: 34px;
+	height: 50px;
+	line-height: 50px;
 	width: 150px;
 	text-align: center;
+	line-height: 50px;
 }
 
 li:hover {
 	cursor: pointer;
 	background-color: #eeeeee;
 }
+.hexagon:hover{
+	filter:brightness(1.2);
+}
+.hexagon {
+	text-align: center;
+	display: inline-block;
+	position: relative;
+	width: 150px;
+	height: 86.60px;
+	background-color: antiquewhite;;
+	margin: 43.30px 0;
+	display: inline-block;
+}
 
-#hexagon span a:hover{
-	text-decoration: underline!important;
+.hexagon:before, .hexagon:after {
+	content: "";
+	position: absolute;
+	width: 0;
+	border-left: 75px solid transparent;
+	border-right: 75px solid transparent;
+}
+
+.hexagon:before {
+	bottom: 100%;
+	left: 0%;
+	border-bottom: 43.30px solid antiquewhite;;
+}
+
+.hexagon:after {
+	top: 100%;
+	left: 0%;
+	width: 0;
+	border-top: 43.30px solid antiquewhite;;
+	width: 0;
+}
+.hexagon span{
+	font-size: 20px;
+}
+.hexagon a {
+	color: orangered;
+	font-size: 30px;
+}
+
+.hexagon a:hover {
+	text-decoration: underline !important;
 }
 </style>
 <meta charset="UTF-8">
@@ -72,7 +82,7 @@ li:hover {
 	}
 %>
 <body style="margin: 0; padding: 0;">
-	<div style="height: 50px; line-height: 50px; width: 100%;">
+	<div style="height: 100px; line-height: 100px; width: 100%;padding:0 10px 0 10px;">
 		헤더헤더헤더헤더
 	</div>
 	<div class="container" style="display: inline-block;">
@@ -85,15 +95,9 @@ li:hover {
 				<li>메뉴</li>
 			</ul>
 		</div>
-		<div class="noti_area" style="width: 400px; height: 220px; border: 1px solid black; display: inline-block; padding: 10px;padding-top:23px;">
-			<!-- style="float: left;border: 1px solid gray; width: 100px; height: 100px; text-align: center;display: inline-block;line-height: 35px;border-radius: 50px;" -->
-			<div id="hexagon">
-				<span style="display:block;transform: rotate(-90deg);">요청<br>
-				<a style="text-decoration: none; color: red; font-size: 30px;" href="javascript:;"><%=noti_list.size()%></a></span>
-			</div>
+		<div class="noti-area" style="display: inline-block;background-color: rgba(0,0,0,0.2);border-radius: 10px;margin-left: 50px;width: 470px;height:270px;padding: 30px;">
+			<div class="hexagon"><span style="line-height: 40px;">요청<br><a style="text-decoration: none;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 		</div>
-
-	</div>
-
-</body>
+		
+	</body>
 </html>

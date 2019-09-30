@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="com.pc.parts.dto.NotiDTO,java.util.List"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto&display=swap" rel="stylesheet">
+<style>
+
+html,body{
+	font-family: 'Nanum Gothic', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+}
+
+li {
+	height: 50px;
+    line-height: 50px;
+	width: 150px;
+	text-align: center;
+}
+
+li:hover {
+	cursor: pointer;
+	background-color: #eeeeee;
+}
+
+
+
+
+.hexagon {
+  display:inline-block;
+  position: relative;
+  width: 150px; 
+  height: 86.60px;
+  background-color: #64C7CC;
+  margin: 43.30px 0;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 43.30px solid #64C7CC;
+}
+
+.hexagon:after {
+  top: 100%;
+  left:0%;
+  width: 0;
+  border-top: 43.30px solid #64C7CC;
+}
+</style>
+<meta charset="UTF-8">
+<title>관리하자</title>
+</head>
+<%
+	int noti_cnt = 0;
+	List<NotiDTO> noti_list = null;
+	if (request.getAttribute("noti_list") != null) {
+		noti_list = (List<NotiDTO>) request.getAttribute("noti_list");
+	}
+%>
+<body style="margin: 0; padding: 0;">
+	<div style="height: 50px; line-height: 50px; width: 100%;">
+		헤더헤더헤더헤더
+	</div>
+	<div class="container" style="display: inline-block;">
+		<div style="float: left; height: 100%; display: inline-block;">
+			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 100%;">
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+			</ul>
+		</div>
+		<div class="hexagon"><span>요청<br><a href="javascript:;"><%=noti_list.size() %></a></span></div>
+		
+	</body>
+</html>
