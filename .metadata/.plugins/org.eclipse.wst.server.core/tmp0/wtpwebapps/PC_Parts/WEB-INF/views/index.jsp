@@ -9,13 +9,23 @@
 html, body {
 	font-family: 'Nanum Gothic', sans-serif;
 	font-family: 'Roboto', sans-serif;
-	font-size: 24px;
+	font-size: 18px;
+}
+
+.noti-area{
+	display: inline-block;
+	float:left;
+	width:360px;
+	height: 70px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 15px;
+	padding:50px;
 }
 
 li {
 	height: 50px;
 	line-height: 50px;
-	width: 150px;
+	width: 210px;
 	text-align: center;
 	line-height: 50px;
 }
@@ -24,52 +34,76 @@ li:hover {
 	cursor: pointer;
 	background-color: #eeeeee;
 }
-.hexagon:hover{
-	filter:brightness(1.2);
-}
-.hexagon {
-	text-align: center;
-	display: inline-block;
-	position: relative;
-	width: 150px;
-	height: 86.60px;
-	background-color: antiquewhite;;
-	margin: 43.30px 0;
-	display: inline-block;
+
+.frame{
+  width: 110px;
+  margin: 0 auto;
+  margin-right:10px;
+  display:inline-block;
+  position: relative;
+  cursor: pointer;
+  float:left;
 }
 
-.hexagon:before, .hexagon:after {
-	content: "";
+.frame:hover .hex-inner{
+  height: 100px;
+  top: 90px !important;
+  border-radius: 4px;
+}
+
+.frame:hover .label{
+  transform: scale(.95);
+  -webkit-transform: scale(.95);
+}
+
+.hex-outer{
+  background: #ABF8FF;
+  width: 110px;
+  height: 64px;
+}
+
+.h1{
+  position: absolute;
+}
+
+.h2{
+  position: absolute;
+  transform: rotate(60deg);
+  -webkit-transform: rotate(60deg);
+}
+
+.h3{
+  position: absolute;
+  transform: rotate(-60deg);
+  -webkit-transform: rotate(-60deg);
+}
+
+.label{
+  position: relative;
+  color: #000000;
+  font-weight: bold;
+  text-align:center;
+  left: 0px;
+    transition: all .1s;
+  -webkit-transition: all .1s;
+}
+
+.frame:hover .noti-cnt{
+  text-decoration: underline!important;
+}
+
+.frame:hover .noti-cnt{
+   text-decoration: underline!important;
+}
+
+.noti-cnt{
+	font-size:24px;
+}
+
+.noti-area{
 	position: absolute;
-	width: 0;
-	border-left: 75px solid transparent;
-	border-right: 75px solid transparent;
 }
 
-.hexagon:before {
-	bottom: 100%;
-	left: 0%;
-	border-bottom: 43.30px solid antiquewhite;;
-}
-
-.hexagon:after {
-	top: 100%;
-	left: 0%;
-	width: 0;
-	border-top: 43.30px solid antiquewhite;;
-	width: 0;
-}
-.hexagon span{
-	font-size: 20px;
-}
-.hexagon a {
-	color: orangered;
-	font-size: 30px;
-}
-
-.hexagon a:hover {
-	text-decoration: underline !important;
-}
 </style>
 <meta charset="UTF-8">
 <title>관리하자</title>
@@ -82,12 +116,12 @@ li:hover {
 	}
 %>
 <body style="margin: 0; padding: 0;">
-	<div style="height: 100px; line-height: 100px; width: 100%;padding:0 10px 0 10px;">
-		헤더헤더헤더헤더
+	<div style="height: 100px; line-height: 100px; width: 100%;padding:0 10px 0 10px; background-color:rgba(230,230,230,0.4);box-sizing: border-box;">
+		<span>관리하자</span>
 	</div>
-	<div class="container" style="display: inline-block;">
+	<div class="container" style="display: inline-block;width:100%;">
 		<div style="float: left; height: 100%; display: inline-block;">
-			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 100%;">
+			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
 				<li>메뉴</li>
 				<li>메뉴</li>
 				<li>메뉴</li>
@@ -95,8 +129,25 @@ li:hover {
 				<li>메뉴</li>
 			</ul>
 		</div>
-		<div class="noti-area" style="display: inline-block;background-color: rgba(0,0,0,0.2);border-radius: 10px;margin-left: 50px;width: 470px;height:270px;padding: 30px;">
-			<div class="hexagon"><span style="line-height: 40px;">요청<br><a style="text-decoration: none;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+		<div class="noti-area">
+			<div class="frame">
+				<div class="hex-outer h1"></div>
+				<div class="hex-outer h2"></div>
+				<div class="hex-outer h3"></div>
+				<div class="label"><span style="font-size:24px;">요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+			</div>
+			<div class="frame">
+				<div class="hex-outer h1"></div>
+				<div class="hex-outer h2"></div>
+				<div class="hex-outer h3"></div>
+				<div class="label"><span style="font-size:24px;">요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+			</div>
+			<div class="frame">
+				<div class="hex-outer h1"></div>
+				<div class="hex-outer h2"></div>
+				<div class="hex-outer h3"></div>
+				<div class="label"><span style="font-size:24px;">요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+			</div>
 		</div>
 		
 	</body>

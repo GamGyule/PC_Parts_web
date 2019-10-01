@@ -14,5 +14,9 @@
 	</typeAliases> -->
 	<typeAliases>
 		<typeAlias type="com.pc.parts.dto.NotiDTO"></typeAlias>
+		<typeAlias type="com.pc.parts.dto.CompanyDTO"></typeAlias>
+		<typeAlias type="com.pc.parts.dto.SuppleDTO"></typeAlias>
 	</typeAliases>
+	
+
 </configuration>
