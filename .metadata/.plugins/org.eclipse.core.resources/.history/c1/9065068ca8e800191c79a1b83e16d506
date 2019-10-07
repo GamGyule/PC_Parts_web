@@ -26,6 +26,11 @@ public class HomeController {
 		  List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
 		  
 		  model.addAttribute("noti_list",noti_list);
+		  
+		  System.out.println(noti_list.size());
+		 for(NotiDTO str : noti_list) {
+			 System.out.println(str.toString());
+		 }
 		
 		return "index";
 	}
