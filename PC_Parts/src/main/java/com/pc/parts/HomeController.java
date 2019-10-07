@@ -28,7 +28,9 @@ public class HomeController {
 		  model.addAttribute("noti_list",noti_list);
 		  
 		  System.out.println(noti_list.size());
-		 
+		 for(NotiDTO str : noti_list) {
+			 System.out.println(str.toString());
+		 }
 		
 		return "index";
 	}

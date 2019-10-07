@@ -15,8 +15,8 @@ html, body {
 .noti-area{
 	display: inline-block;
 	float:left;
-	width:360px;
-	height: 70px;
+	width:400px;
+	height: 100px;
 	background-color: rgba(0,0,0,0.2);
 	border-radius: 15px;
 	padding:50px;
@@ -43,6 +43,7 @@ li:hover {
   position: relative;
   cursor: pointer;
   float:left;
+  top:20px;
 }
 
 .frame:hover .hex-inner{
