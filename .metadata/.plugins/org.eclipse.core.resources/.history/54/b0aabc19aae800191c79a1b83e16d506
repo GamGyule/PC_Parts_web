@@ -127,8 +127,7 @@ li:hover {
 				<li>홈</li>
 				<li>재고 관리</li>
 				<li>입·출고 관리</li>
-				<li>통계 관리</li>
-				<li>재고 요청</li>
+				<li>알림</li>
 			</ul>
 		</div>
 		<div class="noti-area">
@@ -136,19 +135,19 @@ li:hover {
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:24px;">요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:24px;">요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:24px;">요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 			</div>
 		</div>
 		
