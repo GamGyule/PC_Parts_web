@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
+import com.pc.parts.dto.CompanyDTO;
 import com.pc.parts.dto.NotiDTO;
 
 /**
@@ -19,17 +21,27 @@ public class HomeController {
 	
 	@Inject
 	NotiDAOMyBatis notidao;
+	CompanyDAOMyBatis comdao;
 	
-	@RequestMapping("/")
-	public String Index(Model model) {
+	@RequestMapping("/home")
+	public String home(Model model) {
 		
 		  List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
 		  
 		  model.addAttribute("noti_list",noti_list);
 		
-		return "index";
+		return "home";
 	}
 	
+	@RequestMapping("/")
+	public String Index(Model model) {
+		
+		List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
+		
+		model.addAttribute("Com_list",Com_list);
+		return "Index";
+		
+	}
 	
 	
 }
