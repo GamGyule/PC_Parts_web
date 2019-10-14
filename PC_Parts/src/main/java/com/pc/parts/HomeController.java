@@ -46,12 +46,16 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/")
-	public String Index(Model model,HttpServletRequest hsr) {
-		String com = hsr.getParameter("com");
-		//List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
-		
-		//model.addAttribute("com",com);
+	public String Index(Model model) {
+
 		return "login";
+		
+	}
+	
+	@RequestMapping("/home/noti")
+	public String Noti(Model model) {
+		
+		return "noti";
 		
 	}
 
