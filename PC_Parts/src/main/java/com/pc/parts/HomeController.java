@@ -30,27 +30,7 @@ public class HomeController {
 	CompanyDAOMyBatis comdao;
 	
 	@RequestMapping("/home")
-	public String Home(Model model) {
-		
-		  List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
-		  
-		  model.addAttribute("noti_list",noti_list);
-		
-		return "home";
-	}
-	
-	@RequestMapping("/")
-	public String Index(Model model,HttpServletRequest hsr) {
-		String com = hsr.getParameter("com");
-		//List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
-		
-		//model.addAttribute("com",com);
-		return "login";
-		
-	}
-	@RequestMapping("/formAction/loginAction")
-	public String LoginAction(Model model, HttpServletRequest request) {
-		HttpServletResponse response = null;
+	public String Home(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		System.out.println(id + pw);
@@ -64,6 +44,17 @@ public class HomeController {
 		}
 		return "login";
 	}
+	
+	@RequestMapping("/")
+	public String Index(Model model,HttpServletRequest hsr) {
+		String com = hsr.getParameter("com");
+		//List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
+		
+		//model.addAttribute("com",com);
+		return "login";
+		
+	}
+
 
 	
 	
