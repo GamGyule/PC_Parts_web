@@ -24,7 +24,7 @@ public class HomeController {
 	CompanyDAOMyBatis comdao;
 	
 	@RequestMapping("/home")
-	public String home(Model model) {
+	public String Home(Model model) {
 		
 		  List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
 		  
@@ -36,10 +36,10 @@ public class HomeController {
 	@RequestMapping("/")
 	public String Index(Model model) {
 		
-		List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
+		//List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
 		
-		model.addAttribute("Com_list",Com_list);
-		return "Index";
+		//model.addAttribute("Com_list",Com_list);
+		return "login";
 		
 	}
 	
