@@ -40,7 +40,6 @@ public class HomeController {
 		
 		//model.addAttribute("Com_list",Com_list);
 		return "login";
-		
 	}
 	
 	
