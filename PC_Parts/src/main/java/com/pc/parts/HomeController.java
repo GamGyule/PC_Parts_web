@@ -1,8 +1,12 @@
 package com.pc.parts;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +25,8 @@ public class HomeController {
 	
 	@Inject
 	NotiDAOMyBatis notidao;
+	
+	@Inject
 	CompanyDAOMyBatis comdao;
 	
 	@RequestMapping("/home")
@@ -34,14 +40,34 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/")
-	public String Index(Model model) {
-		
+	public String Index(Model model,HttpServletRequest hsr) {
+		String com = hsr.getParameter("com");
 		//List<CompanyDTO> Com_list = (List<CompanyDTO>) comdao.LoginCompany();
 		
-		//model.addAttribute("Com_list",Com_list);
+		//model.addAttribute("com",com);
 		return "login";
 		
 	}
+	@RequestMapping("/formAction/loginAction")
+	public String LoginAction(Model model, HttpServletRequest request) {
+		HttpServletResponse response = null;
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		System.out.println(id + pw);
+		int cnt = comdao.LoginCompany(id, pw);
+		
+		if(cnt == 1) {
+			List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
+			  
+			  model.addAttribute("noti_list",noti_list);
+			return "home";
+		}
+		return "login";
+		
+	}
+
+	
+	
 	
 	
 }

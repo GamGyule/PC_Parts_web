@@ -5,11 +5,13 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="user">
+<mapper namespace="company">
 
 
-	<select id="LoginCompany" resultType="com.pc.parts.dto.CompanyDTO">
-		select * from company where id = #{idx} and pw = #{pw}
+	<select id="LoginCompany" resultType="java.lang.Integer" parameterType="map" >
+		select count(*) from company where id=#{id} and pw=#{pw};
 	</select>
+	
+	
 
 </mapper>
