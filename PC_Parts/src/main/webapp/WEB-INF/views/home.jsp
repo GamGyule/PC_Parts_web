@@ -16,10 +16,10 @@ html, body {
 	display: inline-block;
 	float:left;
 	width:400px;
-	height: 100px;
-	background-color: rgba(0,0,0,0.2);
-	border-radius: 15px;
+	height: 135px;
 	padding:50px;
+	border:1px solid gray;
+	border-radius:3px;
 }
 
 li {
@@ -59,7 +59,7 @@ li:hover {
 }
 
 .hex-outer{
-  background: #ABF8FF;
+  background: #fdcb6e;
   width: 110px;
   height: 64px;
 }
@@ -82,7 +82,7 @@ li:hover {
 
 .label{
   position: relative;
-  color: #000000;
+  color: white;
   font-weight: bold;
   text-align:center;
   left: 0px;
@@ -106,6 +106,11 @@ li:hover {
 	position: absolute;
 }
 
+.h2c-bar{
+	border:2px solid #f39c12;
+	margin:0px;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>관리하자</title>
@@ -118,9 +123,10 @@ li:hover {
 	}
 %>
 <body style="margin: 0; padding: 0;">
-	<div style="height: 100px; line-height: 100px; width: 100%;padding:0 10px 0 10px; background-color:rgba(230,230,230,0.4);box-sizing: border-box;">
-		<span>관리하자</span>
+	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
+		<img width="50" src="images/admin_icon.png"/><span>PC_Parts 관리자</span>
 	</div>
+<!-- 	<hr class="h2c-bar"> -->
 	<div class="container" style="display: inline-block;width:100%;">
 		<div style="float: left; height: 100%; display: inline-block;">
 			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
@@ -136,19 +142,19 @@ li:hover {
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:orangered;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_list.size() %></a></span></div>
 			</div>
 		</div>
 		
