@@ -29,9 +29,15 @@ public class HomeController {
 	@Inject
 	CompanyDAOMyBatis comdao;
 	
+	@RequestMapping("/")
+	public String Index(Model model) {
+		return "login";
+	}
+	
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {
-		String id = request.getParameter("id");
+		return "home";
+		/*String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		System.out.println(id + pw);
 		int cnt = comdao.LoginCompany(id, pw);
@@ -42,14 +48,17 @@ public class HomeController {
 			  model.addAttribute("noti_list",noti_list);
 			return "home";
 		}
-		return "login";
+		return "login";*/
 	}
 	
-	@RequestMapping("/")
-	public String Index(Model model) {
-
-		return "login";
-		
+	@RequestMapping("/main")
+	public String Main(Model model, HttpServletRequest request) {
+		return "home";
+	}
+	
+	@RequestMapping("/productManaging")
+	public String ProductManaging(Model model, HttpServletRequest request) {
+		return "productManaging";
 	}
 	
 	@RequestMapping("/home/noti")
