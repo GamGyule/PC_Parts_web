@@ -6,4 +6,20 @@ import com.pc.parts.dto.SuppleDTO;
 
 public interface SuppleDAO {
 	public List<SuppleDTO> selectSupple();
+	public List<SuppleDTO> selectSuppleName();
+	public List<SuppleDTO> selectSuppleCo();
+	public List<SuppleDTO> selectSupplePriceD();
+	public List<SuppleDTO> selectSupplePriceA();
+	public List<SuppleDTO> selectSuppleCntD();
+	public List<SuppleDTO> selectSuppleCntA();
+	public List<SuppleDTO> selectSuppleCoPriceD();
+	public List<SuppleDTO> selectSuppleCoPriceA();
+	public List<SuppleDTO> selectSuppleCoCntD();
+	public List<SuppleDTO> selectSuppleCoCntA();
+	public List<SuppleDTO> selectSuppleNamePriceD();
+	public List<SuppleDTO> selectSuppleNamePriceA();
+	public List<SuppleDTO> selectSuppleNameCntD();
+	public List<SuppleDTO> selectSuppleNameCntA();
+	
+	
 }
