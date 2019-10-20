@@ -12,14 +12,14 @@ public interface SuppleDAO {
 	public List<SuppleDTO> selectSupplePriceA();
 	public List<SuppleDTO> selectSuppleCntD();
 	public List<SuppleDTO> selectSuppleCntA();
-	public List<SuppleDTO> selectSuppleCoPriceD();
-	public List<SuppleDTO> selectSuppleCoPriceA();
-	public List<SuppleDTO> selectSuppleCoCntD();
-	public List<SuppleDTO> selectSuppleCoCntA();
-	public List<SuppleDTO> selectSuppleNamePriceD();
-	public List<SuppleDTO> selectSuppleNamePriceA();
-	public List<SuppleDTO> selectSuppleNameCntD();
-	public List<SuppleDTO> selectSuppleNameCntA();
+	public List<SuppleDTO> selectSuppleCoPriceD(String Co);
+	public List<SuppleDTO> selectSuppleCoPriceA(String Co);
+	public List<SuppleDTO> selectSuppleCoCntD(String Co);
+	public List<SuppleDTO> selectSuppleCoCntA(String Co);
+	public List<SuppleDTO> selectSuppleNamePriceD(String Name);
+	public List<SuppleDTO> selectSuppleNamePriceA(String Name);
+	public List<SuppleDTO> selectSuppleNameCntD(String Name);
+	public List<SuppleDTO> selectSuppleNameCntA(String Name);
 	
 	
 }
