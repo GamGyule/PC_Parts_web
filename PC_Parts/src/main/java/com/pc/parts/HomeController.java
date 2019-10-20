@@ -65,7 +65,8 @@ public class HomeController {
 	}
 	@RequestMapping("/home/Supple")
 	public String Supple(Model model) {
-		
+		List<SuppleDTO> Supple_List = (List<SuppleDTO>) supdao.selectSupple();
+			model.addAttribute("Supple_List" , Supple_List);
 		return "supple";
 	}
 
