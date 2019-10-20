@@ -11,7 +11,10 @@ html, body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 18px;
 }
-
+a{
+	text-decoration: none;
+	color:black;
+}
 .noti-area{
 	display: inline-block;
 	float:left;
@@ -30,9 +33,13 @@ li {
 	line-height: 50px;
 }
 
+.tab-select{
+	background-color: #fdcb6e;
+}
+
 li:hover {
 	cursor: pointer;
-	background-color: #eeeeee;
+	background-color: #fcdb9d;
 }
 
 .frame{
@@ -106,21 +113,16 @@ li:hover {
 	position: absolute;
 }
 
-.h2c-bar{
-	border:2px solid #f39c12;
-	margin:0px;
-}
-
 </style>
 <meta charset="UTF-8">
 <title>관리하자</title>
 </head>
 <%
-	int noti_cnt = 0;
+	/*int noti_cnt = 0;
 	List<NotiDTO> noti_list = null;
 	if (request.getAttribute("noti_list") != null) {
 		noti_list = (List<NotiDTO>) request.getAttribute("noti_list");
-	}
+	}*/
 %>
 <body style="margin: 0; padding: 0;">
 	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
@@ -130,11 +132,11 @@ li:hover {
 	<div class="container" style="display: inline-block;width:100%;">
 		<div style="float: left; height: 100%; display: inline-block;">
 			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
-				<li>홈</li>
-				<li>재고 관리</li>
-				<li>입·출고 관리</li>
-				<li>통계 관리</li>
-				<li>재고 요청</li>
+				<a href="javascript:;"><li class="tab-select">홈</li></a>
+				<a href="./productManaging"><li>재고 관리</li></a>
+				<a href="javascript:;"><li>입·출고 관리</li></a>
+				<a href="javascript:;"><li>통계 관리</li></a>
+				<a href="javascript:;"><li>재고 요청</li></a>
 			</ul>
 		</div>
 		<div class="noti-area">
@@ -142,19 +144,19 @@ li:hover {
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;">2</a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;">2</a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_list.size() %></a></span></div>
+				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;">2</a></span></div>
 			</div>
 		</div>
 		
