@@ -9,20 +9,25 @@
 	<!-- <select id="getAll" resultType="com.gamgyul.gams.dto.CustomerDTO">
 		select * from customer
 	</select> -->
+	
+	 <select id="AllSuppleCnt" resultType="java.lang.Integer">
+        select count(*) from product
+    </select>
 
-	    <select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product
+	<select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
+        <![CDATA[ select * from product limit (#{page}-1)*15, 15]]>
+    </select>
+    
+    <select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO">
+        <![CDATA[ select * from product where name like '%'#{name}'%' limit (#{page}-1)*15, 15]]>
     </select>
     	
-    	<select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where name like '%'#{name}'%' 
+    <select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO">
+        select * from product where co = #{co} limit (#{page}-1)*15, 15
     </select>
+
     	
-    	<select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where co = #{co}
-    </select>
-    	
-    	<select id="SuppleSelectPriceD" resultType="com.pc.parts.dto.SuppleDTO">
+    <select id="SuppleSelectPriceD" resultType="com.pc.parts.dto.SuppleDTO">
         select * from product order by price desc
     </select>
     

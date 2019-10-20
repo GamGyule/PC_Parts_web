@@ -24,58 +24,61 @@ import com.pc.parts.dto.SuppleDTO;
  */
 @Controller
 public class HomeController {
-	
+
 	@Inject
 	NotiDAOMyBatis notidao;
-	
+
 	@Inject
 	CompanyDAOMyBatis comdao;
-	
+
 	@Inject
 	SuppleDAOMybatis supdao;
-	
+
 	@RequestMapping("/")
 	public String Index(Model model) {
 		return "login";
 	}
-	
+
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {
 		return "home";
-		/*String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		System.out.println(id + pw);
-		int cnt = comdao.LoginCompany(id, pw);
-		
-		if(cnt == 1) {
-			List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
-			  
-			  model.addAttribute("noti_list",noti_list);
-			return "home";
-		}
-		return "login";*/
+		/*
+		 * String id = request.getParameter("id"); String pw =
+		 * request.getParameter("pw"); System.out.println(id + pw); int cnt =
+		 * comdao.LoginCompany(id, pw);
+		 * 
+		 * if(cnt == 1) { List<NotiDTO> noti_list = (List<NotiDTO>)
+		 * notidao.selectNoti();
+		 * 
+		 * model.addAttribute("noti_list",noti_list); return "home"; } return "login";
+		 */
 	}
-	
+
 	@RequestMapping("/main")
 	public String Main(Model model, HttpServletRequest request) {
 		return "home";
 	}
-	
-	@RequestMapping("/productManaging")
+
+	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
-		return "productManaging";
+		/*if(request.getParameter("page") != null) {
+			String page = request.getParameter("page");
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>)supdao.selectSupple(page);
+			model.addAttribute("list", Supple_list);
+		}else {
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>)supdao.selectSupple("1");
+			model.addAttribute("list", Supple_list);
+		}*/
+		
+		//int SuppleCnt = supdao.AllSuppleCnt();
+		//model.addAttribute("SuppleCnt",SuppleCnt);
+		return "supple";
 	}
-	
+
 	@RequestMapping("/home/noti")
 	public String Noti(Model model) {
-		
+
 		return "noti";
-		
-	}
-	@RequestMapping("/home/Supple")
-	public String Supple(Model model) {
-		List<SuppleDTO> Supple_List = (List<SuppleDTO>) supdao.selectSupple();
-			model.addAttribute("Supple_List" , Supple_List);
-		return "supple";
+
 	}
 }

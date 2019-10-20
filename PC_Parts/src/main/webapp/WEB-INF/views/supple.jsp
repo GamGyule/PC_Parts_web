@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.pc.parts.dto.NotiDTO,java.util.List"%>
+<%@page import="com.pc.parts.dto.SuppleDTO,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +133,7 @@ margin-left:10px;
 	padding:5px;
 }
 .product_table td div {
-	width: 500px;
+	width: 450px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -149,6 +149,27 @@ margin-left:10px;
 	min-width: 50px;
 }
 
+
+.product_table th:nth-child(1) {
+	min-width: 100px;
+}
+.product_table th:nth-child(2) {
+	min-width: 100px;
+}
+.product_table th:nth-child(3) {
+	min-width: 100px;
+}
+
+
+.product_table th:nth-child(4) {
+	width:450px;
+	min-width: 450px;
+}
+
+.product_table th:nth-child(5) {
+	width:450px;
+	min-width: 450px;
+}
 .product_table td:nth-child(6) {
 	text-align: right;
 }
@@ -172,6 +193,12 @@ margin-left:10px;
 	height:30px;
 	padding:3px;
 	margin-bottom: 3px;
+}
+.list-number{
+
+}
+.current-page{
+	color:red;
 }
 </style>
 <meta charset="UTF-8">
@@ -201,7 +228,7 @@ margin-left:10px;
 		</div>
 		<div style="overflow: hidden;">
 		<div class="product-list">
-			<div style="margin-left: 5px;"><h2 style="float:left">제품 관리</h2></div>
+			<div style="margin-left: 5px;display: inline-block;"><h2>제품 관리</h2></div>
 			<br>
 			<div style="display: inline-block;">
 				<table id="indexTable" class="product_table" style="table-layout: fixed;">
@@ -209,23 +236,67 @@ margin-left:10px;
 						<th onClick="SortTable(0,'T');">번호</th><th onclick="SortTable(1,'T');">회사</th><th onclick="SortTable(2,'N');">부품</th><th onclick="SortTable(3,'T');">제품 이름</th><th onclick="SortTable(4,'T');">제품 설명</th><th onclick="SortTable(5,'N');">가격</th><th onclick="SortTable(6,'N');">개수</th>
 					</thead>
 					<tbody>
-						<tr>
-						<td>AAAA1111</td><td>AAAA</td><td>1111</td><td title="[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)"><div>[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)</div></td><td><div title="코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)">코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)</div></td><td>1183000</td><td>30</td>
-					</tr>
-					<tr>
-						<td>AAAA3333</td><td>AAAA</td><td>3333</td><td title="[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)"><div>[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)</div></td><td><div title="코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)">코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)</div></td><td>1183000</td><td>30</td>
-					</tr>
-					<tr>
-						<td>BBBB1111</td><td>BBBB</td><td>2222</td><td title="[INTEL] 인텔 코어 i9-7960X 정품박스 (스카이레이크X/2.8GHz/22.0MB/쿨러미포함)"><div>[INTEL] 인텔 코어 i9-7960X 정품박스 (스카이레이크X/2.8GHz/22.0MB/쿨러미포함)</div></td><td><div title="Core i9-7960X(2.8GHz) / 헥사데카코어 / 스카이레이크-X(Skylake-X) / 14nm / 22MB버퍼 / LGA2066 / 박스 / 쿨러미포함">Core i9-7960X(2.8GHz) / 헥사데카코어 / 스카이레이크-X(Skylake-X) / 14nm / 22MB버퍼 / LGA2066 / 박스 / 쿨러미포함</div></td><td>1183000</td><td>30</td>
-					</tr>
-					<tr>
-						<td>AAAA5555</td><td>AAAA</td><td>4444</td><td title="[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)"><div>[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)</div></td><td><div title="코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)">코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)</div></td><td>1183000</td><td>30</td>
-					</tr>
-					<tr>
-						<td>BBBB7777</td><td>BBBB</td><td>5555</td><td title="[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)"><div>[INTEL] 코어9세대 i9-9900X 정품박스(스카이레이크X/3.5GHz/19.25MB/쿨러미포함)</div></td><td><div title="코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)">코어 i9-9900X / 9세대 스카이레이크-X / 데카(10)코어 / LGA2066 / 14nm / 19.25MB / 박스(쿨러미포함)</div></td><td>1183000</td><td>30</td>
-					</tr>
+					<%
+						if(request.getAttribute("list") != null){
+							List<SuppleDTO> list = (List<SuppleDTO>)request.getAttribute("list");
+							for(int i = 0; i < list.size();i++){
+								SuppleDTO supple = list.get(i);
+								%>
+									<tr>
+										<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("{0:N}",supple.getPrice()) %></td><td><%=String.format("{0:N}",supple.getCnt()) %></td>
+									</tr>
+								<%
+							}
+						}
+					%>
 					</tbody>
 				</table>
+				<div style="text-align: center">
+					<%
+						int suppleCount = 0;
+						int currentPage = 1;
+						if(request.getAttribute("SuppleCnt") != null){
+							suppleCount = (Integer)request.getAttribute("SuppleCnt");
+						}
+						
+						if(request.getParameter("page") != null){
+							currentPage = Integer.parseInt(request.getParameter("page"));
+						}
+						
+						if(currentPage >= 4){
+							%>
+								<a class="list-number" href="./supple?page=1">1</a>...
+							<%
+						}
+						
+						if(suppleCount % 15 == 0){
+							for(int i = 1; i <= suppleCount/15;i++){
+								%>
+									<a class="list-number" href="./supple?page=<%=i%>"> <%=i%></a>
+								<%
+							}
+						}else{
+							for(int i = 1; i <= suppleCount/15+1;i++){
+								if(Math.abs(currentPage-i) <= 2){
+									if(currentPage == i){
+										%>
+											<a class="current-page" href="./supple?page=<%=i%>"> <%=i%></a>
+										<%
+									}else{
+										%>
+											<a class="list-number" href="./supple?page=<%=i%>"> <%=i%></a>
+										<%
+									}
+									
+								}
+							}
+							if((suppleCount/15+1 - currentPage) >= 3){
+								%>...<a class="list_number" href="./supple?page=<%=suppleCount/15+1 %>"><%=suppleCount/15+1 %></a><%
+							}
+						}
+						
+					%>
+				</div>
 			</div>
 		</div>
 		<div style="overflow: hidden;">

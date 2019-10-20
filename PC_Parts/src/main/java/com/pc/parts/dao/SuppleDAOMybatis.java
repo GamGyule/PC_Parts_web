@@ -15,9 +15,14 @@ public class SuppleDAOMybatis implements SuppleDAO {
     @Autowired
     private SqlSession sqlSession;
 	@Override
-	public List<SuppleDTO> selectSupple() {
+	public List<SuppleDTO> selectSupple(String page) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectAll");
+		return sqlSession.selectList("Supple.SuppleSelectAll",page);
+	}
+	@Override
+	public int AllSuppleCnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Supple.AllSuppleCnt");
 	}
 	@Override
 	public List<SuppleDTO> selectSuppleName(String Name) {
@@ -89,5 +94,4 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectNameCntA" , Name);
 	}
-
 }
