@@ -11,15 +11,15 @@
 	</select> -->
 
 	    <select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product
+        select * from product limit #{page}, 15
     </select>
     	
     	<select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where name like '%'#{name}'%' 
+        select * from product where name like '%'#{name}'%' limit #{page}, 15
     </select>
     	
     	<select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where co = #{co}
+        select * from product where co = #{co} limit #{page}, 15
     </select>
     	
     	<select id="SuppleSelectPriceD" resultType="com.pc.parts.dto.SuppleDTO">
