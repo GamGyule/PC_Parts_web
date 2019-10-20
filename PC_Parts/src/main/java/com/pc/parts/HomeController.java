@@ -31,6 +31,8 @@ public class HomeController {
 	@Inject
 	CompanyDAOMyBatis comdao;
 	
+	@Inject
+	SuppleDAOMybatis supdao;
 	
 	@RequestMapping("/")
 	public String Index(Model model) {
