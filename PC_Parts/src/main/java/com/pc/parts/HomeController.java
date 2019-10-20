@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
+import com.pc.parts.dao.SuppleDAOMybatis;
 import com.pc.parts.dto.CompanyDTO;
 import com.pc.parts.dto.NotiDTO;
+import com.pc.parts.dto.SuppleDTO;
 
 /**
  * Handles requests for the application home page.
@@ -28,6 +30,7 @@ public class HomeController {
 	
 	@Inject
 	CompanyDAOMyBatis comdao;
+	
 	
 	@RequestMapping("/")
 	public String Index(Model model) {
@@ -67,10 +70,10 @@ public class HomeController {
 		return "noti";
 		
 	}
-
-
-	
-	
-	
-	
+	@RequestMapping("/home/Supple")
+	public String Supple(Model model) {
+		List<SuppleDTO> Supple_List = (List<SuppleDTO>) supdao.selectSupple();
+			model.addAttribute("Supple_List" , Supple_List);
+		return "supple";
+	}
 }
