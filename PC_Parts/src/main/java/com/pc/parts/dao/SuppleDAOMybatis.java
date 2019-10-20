@@ -20,12 +20,12 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		return sqlSession.selectList("Supple.SuppleSelectAll");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleName() {
+	public List<SuppleDTO> selectSuppleName(String Name) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectName");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleCo() {
+	public List<SuppleDTO> selectSuppleCo(String Co) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectCo");
 	}
@@ -50,42 +50,42 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		return sqlSession.selectList("Supple.SuppleSelectCntA");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleCoPriceD() {
+	public List<SuppleDTO> selectSuppleCoPriceD(String Co) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectCoPriceD");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleCoPriceA() {
+	public List<SuppleDTO> selectSuppleCoPriceA(String Co) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectCoPriceA");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleCoCntD() {
+	public List<SuppleDTO> selectSuppleCoCntD(String Co) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectCoCntD");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleCoCntA() {
+	public List<SuppleDTO> selectSuppleCoCntA(String Co) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectCoCntA");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleNamePriceD() {
+	public List<SuppleDTO> selectSuppleNamePriceD(String Name) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectNamePriceD");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleNamePriceA() {
+	public List<SuppleDTO> selectSuppleNamePriceA(String Name) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectNamePriceA");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleNameCntD() {
+	public List<SuppleDTO> selectSuppleNameCntD(String Name) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectNameCntD");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleNameCntA() {
+	public List<SuppleDTO> selectSuppleNameCntA(String Name) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Supple.SuppleSelectNameCntA");
 	}
