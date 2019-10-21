@@ -8,7 +8,7 @@ public class SuppleDTO {
 	private String name;
 	private String info;
 	private int price;
-	private int cnt;
+	private int count;
 	
 	public String getIdx() {
 		return idx;
@@ -59,11 +59,11 @@ public class SuppleDTO {
 	}
 
 	public int getCnt() {
-		return cnt;
+		return count;
 	}
 
 	public void setCnt(int cnt) {
-		this.cnt = cnt;
+		this.count = cnt;
 	}
 
 }

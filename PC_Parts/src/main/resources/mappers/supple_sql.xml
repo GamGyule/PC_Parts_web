@@ -15,7 +15,7 @@
     </select>
 
 	<select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
-        <![CDATA[ select * from product limit (#{page}-1)*15, 15]]>
+        <![CDATA[ select * from product limit #{page}, 15]]>
     </select>
     
     <select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO">

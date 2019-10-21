@@ -61,17 +61,17 @@ public class HomeController {
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
-		/*if(request.getParameter("page") != null) {
+		if(request.getParameter("page") != null) {
 			String page = request.getParameter("page");
 			List<SuppleDTO> Supple_list = (List<SuppleDTO>)supdao.selectSupple(page);
 			model.addAttribute("list", Supple_list);
 		}else {
 			List<SuppleDTO> Supple_list = (List<SuppleDTO>)supdao.selectSupple("1");
 			model.addAttribute("list", Supple_list);
-		}*/
+		}
 		
-		//int SuppleCnt = supdao.AllSuppleCnt();
-		//model.addAttribute("SuppleCnt",SuppleCnt);
+		int SuppleCnt = supdao.AllSuppleCnt();
+		model.addAttribute("SuppleCnt",SuppleCnt);
 		return "supple";
 	}
 

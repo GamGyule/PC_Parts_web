@@ -15,8 +15,9 @@ public class SuppleDAOMybatis implements SuppleDAO {
     @Autowired
     private SqlSession sqlSession;
 	@Override
-	public List<SuppleDTO> selectSupple(String page) {
+	public List<SuppleDTO> selectSupple(String spage) {
 		// TODO Auto-generated method stub
+		int page = (Integer.parseInt(spage)-1)*15;
 		return sqlSession.selectList("Supple.SuppleSelectAll",page);
 	}
 	@Override

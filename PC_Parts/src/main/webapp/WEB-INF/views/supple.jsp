@@ -243,7 +243,7 @@ margin-left:10px;
 								SuppleDTO supple = list.get(i);
 								%>
 									<tr>
-										<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("{0:N}",supple.getPrice()) %></td><td><%=String.format("{0:N}",supple.getCnt()) %></td>
+										<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("%,d",supple.getPrice()) %></td><td><%=String.format("%,d",supple.getCnt()) %></td>
 									</tr>
 								<%
 							}
