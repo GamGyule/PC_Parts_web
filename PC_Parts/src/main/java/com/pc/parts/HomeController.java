@@ -41,37 +41,43 @@ public class HomeController {
 
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {
-		return "home";
-		/*
-		 * String id = request.getParameter("id"); String pw =
-		 * request.getParameter("pw"); System.out.println(id + pw); int cnt =
-		 * comdao.LoginCompany(id, pw);
-		 * 
-		 * if(cnt == 1) { List<NotiDTO> noti_list = (List<NotiDTO>)
-		 * notidao.selectNoti();
-		 * 
-		 * model.addAttribute("noti_list",noti_list); return "home"; } return "login";
-		 */
+			List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
+			model.addAttribute("noti_list", noti_list);
+			return "home";
+	}
+	
+	@RequestMapping("/loginaction")
+	public String LoginAction(Model model, HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		System.out.println(id + pw);
+		int cnt = comdao.LoginCompany(id, pw);
+
+		model.addAttribute("userCnt",cnt);
+		return "formaction/loginAction";
 	}
 
 	@RequestMapping("/main")
 	public String Main(Model model, HttpServletRequest request) {
+		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
+
+		model.addAttribute("noti_list", noti_list);
 		return "home";
 	}
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
-		if(request.getParameter("page") != null) {
+		if (request.getParameter("page") != null) {
 			String page = request.getParameter("page");
-			List<SuppleDTO> Supple_list = (List<SuppleDTO>)supdao.selectSupple(page);
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
 			model.addAttribute("list", Supple_list);
-		}else {
-			List<SuppleDTO> Supple_list = (List<SuppleDTO>)supdao.selectSupple("1");
+		} else {
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple("1");
 			model.addAttribute("list", Supple_list);
 		}
-		
+
 		int SuppleCnt = supdao.AllSuppleCnt();
-		model.addAttribute("SuppleCnt",SuppleCnt);
+		model.addAttribute("SuppleCnt", SuppleCnt);
 		return "supple";
 	}
 

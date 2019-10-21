@@ -118,11 +118,12 @@ li:hover {
 <title>관리하자</title>
 </head>
 <%
-	/*int noti_cnt = 0;
+	int noti_cnt = 0;
 	List<NotiDTO> noti_list = null;
 	if (request.getAttribute("noti_list") != null) {
 		noti_list = (List<NotiDTO>) request.getAttribute("noti_list");
-	}*/
+		noti_cnt = noti_list.size();
+	}
 %>
 <body style="margin: 0; padding: 0;">
 	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
@@ -144,7 +145,7 @@ li:hover {
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;">2</a></span></div>
+				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_cnt %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>

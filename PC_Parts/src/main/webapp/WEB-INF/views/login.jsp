@@ -125,7 +125,7 @@ body {
 <body>
 	<div class="login-page">
 		<div class="form">
-			<form class="login-form" action="./home"
+			<form class="login-form" action="./loginaction"
 				method="post">
 
 				<input name="id" type="text" placeholder="아이디" />

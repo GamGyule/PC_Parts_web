@@ -219,7 +219,7 @@ margin-left:10px;
 	<div class="container" style="display: inline-block;width:100%;">
 		<div style="float: left; height: 100%; display: inline-block;">
 			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
-				<a href="./main"><li>홈</li></a>
+				<a href="./home"><li>홈</li></a>
 				<a href="javascript:;"><li class="tab-select">재고 관리</li></a>
 				<a href="javascript:;"><li>입·출고 관리</li></a>
 				<a href="javascript:;"><li>통계 관리</li></a>
