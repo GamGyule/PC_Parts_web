@@ -8,8 +8,8 @@
 <mapper namespace="company">
 
 
-	<select id="LoginCompany" resultType="java.lang.Integer" parameterType="map" >
-		select count(*) from company where id=#{id} and pw=#{pw};
+	<select id="LoginCompany" resultType="com.pc.parts.dto.CompanyDTO" parameterType="map" >
+		select * from company where id=#{id} and pw=#{pw};
 	</select>
 	
 	

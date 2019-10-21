@@ -1,12 +1,10 @@
 package com.pc.parts;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,19 +39,24 @@ public class HomeController {
 
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {
-			List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
-			model.addAttribute("noti_list", noti_list);
-			return "home";
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			return "login";
+		}
+		
+		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
+		model.addAttribute("noti_list", noti_list);
+		return "home";
 	}
-	
+
 	@RequestMapping("/loginaction")
 	public String LoginAction(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		System.out.println(id + pw);
-		int cnt = comdao.LoginCompany(id, pw);
+		List<CompanyDTO> companyDtoList = (List<CompanyDTO>) comdao.LoginCompany(id, pw);
 
-		model.addAttribute("userCnt",cnt);
+		model.addAttribute("list", companyDtoList);
 		return "formaction/loginAction";
 	}
 

@@ -112,7 +112,7 @@ li:hover {
 }
 
 .product-list {
-margin-left:10px;
+	margin-left: 10px;
 	display: inline-block;
 	float: left;
 }
@@ -121,17 +121,21 @@ margin-left:10px;
 	padding: 0px;
 	border-collapse: collapse;
 }
-.product_table th{
+
+.product_table th {
 	background-color: #fdcb6e;
 }
+
 .product_table th:hover {
-	user-select:none;
+	user-select: none;
 	cursor: pointer;
 	background-color: #fcdb9d;
 }
-.product_table td{
-	padding:5px;
+
+.product_table td {
+	padding: 5px;
 }
+
 .product_table td div {
 	width: 450px;
 	text-overflow: ellipsis;
@@ -149,27 +153,28 @@ margin-left:10px;
 	min-width: 50px;
 }
 
-
 .product_table th:nth-child(1) {
 	min-width: 100px;
 }
+
 .product_table th:nth-child(2) {
 	min-width: 100px;
 }
+
 .product_table th:nth-child(3) {
 	min-width: 100px;
 }
 
-
 .product_table th:nth-child(4) {
-	width:450px;
+	width: 450px;
 	min-width: 450px;
 }
 
 .product_table th:nth-child(5) {
-	width:450px;
+	width: 450px;
 	min-width: 450px;
 }
+
 .product_table td:nth-child(6) {
 	text-align: right;
 }
@@ -179,38 +184,50 @@ margin-left:10px;
 }
 
 .search-box {
-	padding:5px;
-	margin-top:80px;
+	padding: 5px;
+	margin-top: 80px;
 	float: left;
-	width : 280px;
+	width: 280px;
 	height: 500px;
 	border: 1px solid black;
-	border-radius:7px;
-	margin-left:10px;
+	border-radius: 7px;
+	margin-left: 10px;
 }
-.search-box-input{
-	width:96%;
-	height:30px;
-	padding:3px;
+
+.search-box-input {
+	width: 96%;
+	height: 30px;
+	padding: 3px;
 	margin-bottom: 3px;
 }
-.list-number{
 
+.supple-tr:hover {
+	background-color: #eeeeee;
+	cursor: pointer;
 }
-.current-page{
-	color:red;
+
+.current-page {
+	color: red;
+}
+
+.under-count {
+	background-color: #f7a79e;
+}
+
+.list-number {
+	display: inline-block;
+	text-align:center;
+	line-height:20px;
+	width : 20px;
+	height: 20px;
+	border: 1px solid black;
+	border-radius: 3px;
+
 }
 </style>
 <meta charset="UTF-8">
 <title>관리하자</title>
 </head>
-<%
-	/*int noti_cnt = 0;
-	List<NotiDTO> noti_list = null;
-	if (request.getAttribute("noti_list") != null) {
-		noti_list = (List<NotiDTO>) request.getAttribute("noti_list");
-	}*/
-%>
 <body style="margin: 0; padding: 0;">
 	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
 		<img width="50" src="images/admin_icon.png"/><span>PC_Parts 관리자</span>
@@ -230,7 +247,7 @@ margin-left:10px;
 		<div class="product-list">
 			<div style="margin-left: 5px;display: inline-block;"><h2>제품 관리</h2></div>
 			<br>
-			<div style="display: inline-block;">
+			<div style="display: inline-block;min-height: 574px;">
 				<table id="indexTable" class="product_table" style="table-layout: fixed;">
 					<thead>
 						<th onClick="SortTable(0,'T');">번호</th><th onclick="SortTable(1,'T');">회사</th><th onclick="SortTable(2,'N');">부품</th><th onclick="SortTable(3,'T');">제품 이름</th><th onclick="SortTable(4,'T');">제품 설명</th><th onclick="SortTable(5,'N');">가격</th><th onclick="SortTable(6,'N');">개수</th>
@@ -241,17 +258,26 @@ margin-left:10px;
 							List<SuppleDTO> list = (List<SuppleDTO>)request.getAttribute("list");
 							for(int i = 0; i < list.size();i++){
 								SuppleDTO supple = list.get(i);
-								%>
-									<tr>
+								if(supple.getCnt() > 5){
+									%>
+										<tr class="supple-tr">
+											<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("%,d",supple.getPrice()) %></td><td><%=String.format("%,d",supple.getCnt()) %></td>
+										</tr>
+									<%
+								}else{
+									%>
+									<tr class="supple-tr under-count">
 										<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("%,d",supple.getPrice()) %></td><td><%=String.format("%,d",supple.getCnt()) %></td>
 									</tr>
 								<%
+								}
 							}
 						}
 					%>
 					</tbody>
 				</table>
-				<div style="text-align: center">
+			</div>
+			<div style="text-align: center">
 					<%
 						int suppleCount = 0;
 						int currentPage = 1;
@@ -280,7 +306,7 @@ margin-left:10px;
 								if(Math.abs(currentPage-i) <= 2){
 									if(currentPage == i){
 										%>
-											<a class="current-page" href="./supple?page=<%=i%>"> <%=i%></a>
+											<a class="list-number current-page" href="./supple?page=<%=i%>"> <%=i%></a>
 										<%
 									}else{
 										%>
@@ -291,13 +317,12 @@ margin-left:10px;
 								}
 							}
 							if((suppleCount/15+1 - currentPage) >= 3){
-								%>...<a class="list_number" href="./supple?page=<%=suppleCount/15+1 %>"><%=suppleCount/15+1 %></a><%
+								%>...<a class="list-number" href="./supple?page=<%=suppleCount/15+1 %>"><%=suppleCount/15+1 %></a><%
 							}
 						}
 						
 					%>
 				</div>
-			</div>
 		</div>
 		<div style="overflow: hidden;">
 			<div class="search-box">

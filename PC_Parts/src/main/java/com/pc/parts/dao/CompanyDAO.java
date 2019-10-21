@@ -5,5 +5,5 @@ import java.util.List;
 import com.pc.parts.dto.CompanyDTO;
 
 public interface CompanyDAO {
-	public int LoginCompany(String id, String pw);
+	public List<CompanyDTO> LoginCompany(String id, String pw);
 }
