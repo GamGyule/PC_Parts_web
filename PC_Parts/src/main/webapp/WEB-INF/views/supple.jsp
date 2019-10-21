@@ -174,6 +174,9 @@ li:hover {
 	width: 450px;
 	min-width: 450px;
 }
+.product_table td:nth-child(3) {
+	text-align: center;
+}
 
 .product_table td:nth-child(6) {
 	text-align: right;
@@ -211,7 +214,7 @@ li:hover {
 }
 
 .under-count {
-	background-color: #f7a79e;
+	background-color: #fab7af;
 }
 
 .list-number {
