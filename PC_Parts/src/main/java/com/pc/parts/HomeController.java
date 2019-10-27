@@ -36,6 +36,13 @@ public class HomeController {
 	public String Index(Model model) {
 		return "login";
 	}
+	
+	@RequestMapping("/smodify")
+	public String Smodify(Model model, HttpServletRequest request) {
+		String pdIdx = request.getParameter("pdIdx");
+		
+		return "smodify";
+	}
 
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {

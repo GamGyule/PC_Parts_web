@@ -11,6 +11,7 @@ html, body {
 	font-family: 'Nanum Gothic', sans-serif;
 	font-family: 'Roboto', sans-serif;
 	font-size: 18px;
+	overflow: hidden;
 }
 
 a {
