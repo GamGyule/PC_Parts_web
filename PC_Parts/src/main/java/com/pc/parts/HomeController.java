@@ -90,36 +90,45 @@ public class HomeController {
 			return "login";
 		}
 		
-		if (request.getParameter("page") != null) {
-			String page = request.getParameter("page");
-			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
-			model.addAttribute("list", Supple_list);
-		} else {
-			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple("1");
-			model.addAttribute("list", Supple_list);
+		if(request.getParameter("coName") != null) {
+			//회사 이름으로 검색
+			
+			
+		}else if(request.getParameter("name") != null){
+			//부품 이름으로 검색
+			String name = request.getParameter("name");
+
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name , page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name ,"1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.NameSuppleCnt();
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
+		}else {
+			//그냥 보여주는거
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple("1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.AllSuppleCnt();
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
 		}
-
-		int SuppleCnt = supdao.AllSuppleCnt();
-		model.addAttribute("SuppleCnt", SuppleCnt);
-		return "supple";
-	}
-	
-	@RequestMapping("/supple/")
-	public String ProductSearchName(Model model, HttpServletRequest request) {
-		String name = request.getParameter("name");
-
-		if (request.getParameter("page") != null) {
-			String page = request.getParameter("page");
-			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name , page);
-			model.addAttribute("list", Supple_list);
-		} else {
-			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name ,"1");
-			model.addAttribute("list", Supple_list);
-		}
-
-		int SuppleCnt = supdao.NameSuppleCnt();
-		model.addAttribute("SuppleCnt", SuppleCnt);
-		return "supple";
+		
+		return null;
+		
+		
 	}
 
 	@RequestMapping("/home/noti")
