@@ -1,7 +1,8 @@
 package com.pc.parts.dao;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,73 +27,34 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		return sqlSession.selectOne("Supple.AllSuppleCnt");
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleName(String Name) {
+	public List<SuppleDTO> selectSuppleName(String Name , String spage) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectName" , Name);
+		Map<String,String> map = new HashMap<String, String>();
+		int page = (Integer.parseInt(spage)-1)*15;
+		String npage = Integer.toString(page);
+		map.put("name", Name);
+		map.put("spage", npage);
+		return sqlSession.selectList("Supple.SuppleSelectName" , map);
 	}
 	@Override
-	public List<SuppleDTO> selectSuppleCo(String Co) {
+	public List<SuppleDTO> selectSuppleCo(String Co , String spage) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCo" , Co);
+		Map<String,String> map = new HashMap<String, String>();
+		int page = (Integer.parseInt(spage)-1)*15;
+		String npage = Integer.toString(page);
+		map.put("co", Co);
+		map.put("spage", npage);
+		return sqlSession.selectList("Supple.SuppleSelectCo" , map);
 	}
 	@Override
-	public List<SuppleDTO> selectSupplePriceD() {
+	public int NameSuppleCnt() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectPriceD");
+		return sqlSession.selectOne("Supple.NameSuppleCnt");
 	}
 	@Override
-	public List<SuppleDTO> selectSupplePriceA() {
+	public int CoSuppleCnt() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectPriceA");
+		return sqlSession.selectOne("Supple.CoSuppleCnt");
 	}
-	@Override
-	public List<SuppleDTO> selectSuppleCntD() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCntD");
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleCntA() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCntA");
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleCoPriceD(String Co) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCoPriceD" ,Co);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleCoPriceA(String Co) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCoPriceA" ,Co);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleCoCntD(String Co) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCoCntD" ,Co);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleCoCntA(String Co) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectCoCntA" ,Co);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleNamePriceD(String Name) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectNamePriceD" , Name);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleNamePriceA(String Name) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectNamePriceA" , Name);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleNameCntD(String Name) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectNameCntD" , Name);
-	}
-	@Override
-	public List<SuppleDTO> selectSuppleNameCntA(String Name) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Supple.SuppleSelectNameCntA" , Name);
-	}
+
 }

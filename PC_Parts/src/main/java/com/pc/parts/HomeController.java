@@ -90,6 +90,24 @@ public class HomeController {
 		model.addAttribute("SuppleCnt", SuppleCnt);
 		return "supple";
 	}
+	
+	@RequestMapping("/supple/")
+	public String ProductSearchName(Model model, HttpServletRequest request) {
+		String name = request.getParameter("name");
+
+		if (request.getParameter("page") != null) {
+			String page = request.getParameter("page");
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name , page);
+			model.addAttribute("list", Supple_list);
+		} else {
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name ,"1");
+			model.addAttribute("list", Supple_list);
+		}
+
+		int SuppleCnt = supdao.NameSuppleCnt();
+		model.addAttribute("SuppleCnt", SuppleCnt);
+		return "supple";
+	}
 
 	@RequestMapping("/home/noti")
 	public String Noti(Model model) {

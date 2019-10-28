@@ -331,8 +331,8 @@ li:hover {
 		<div style="overflow: hidden;">
 			<div class="search-box">
 				<h3>상세 검색</h3>
-				<input class="search-box-input" type="text" placeholder="이름 검색) INTEL">
-				<input class="search-box-input" type="text" placeholder="회사 검색) AAA">
+				<input name ="searchName" class="search-box-input" type="text" placeholder="이름 검색) INTEL">
+				<input name = "searchCompany" class="search-box-input" type="text" placeholder="회사 검색) AAA">
 			</div>
 		</div>
 		</div>
