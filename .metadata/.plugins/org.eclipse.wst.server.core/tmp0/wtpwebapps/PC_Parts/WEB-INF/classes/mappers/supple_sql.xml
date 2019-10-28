@@ -27,52 +27,8 @@
     </select>
 
     	
-    <select id="SuppleSelectPriceD" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product order by price desc
-    </select>
-    
-    <select id="SuppleSelectPriceA" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product order by price
-    </select>
-    
-    	<select id="SuppleSelectPCntD" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product order by cnt desc
-    </select>
-    
-    <select id="SuppleSelectPriceCnt" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product order by cnt
-    </select>
-    
-    <select id="SuppleSelectCoPriceD" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where co = #{co} order by price desc
-    </select>
-    
-    <select id="SuppleSelectCoPriceA" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where co = #{co} order by price
-    </select>
-    
-    <select id="SuppleSelectNamePriceD" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where name like '%'#{name}'%' order by price desc 
-    </select>
-    
-    <select id="SuppleSelectNamePriceA" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where name like '%'#{name}'%' order by price 
-    </select>
-    
-        <select id="SuppleSelectCoCntD" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where co = #{co} order by cnt desc
-    </select>
-    
-    <select id="SuppleSelectCoCntA" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where co = #{co} order by cnt
-    </select>
-    
-        <select id="SuppleSelectNamePCntD" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where name like '%'#{name}'%' order by cnt desc
-    </select>
-    
-    <select id="SuppleSelectNameCntA" resultType="com.pc.parts.dto.SuppleDTO">
-        select * from product where name like '%'#{name}'%' order by cnt 
+    <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
+        select * from product where #{idx} = idx;
     </select>
     
 </mapper>

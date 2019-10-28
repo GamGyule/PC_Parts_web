@@ -229,6 +229,18 @@ li:hover {
 
 }
 </style>
+<script>
+	function smodifySubmit(idx){
+		var myForm = document.popForm;
+		var url = "/smodify";
+		window.open("","popForm","width=420,height=340,left=700,top=150,resizable=no,menubar=no");
+		myForm.action = url;
+		myForm.method = "post";
+		myForm.target = "popForm";
+		myForm.suppleIdx.value = idx;
+		myForm.submit();
+	}
+</script>
 <meta charset="UTF-8">
 <title>관리하자</title>
 </head>
@@ -247,6 +259,10 @@ li:hover {
 				<a href="javascript:;"><li>재고 요청</li></a>
 			</ul>
 		</div>
+		<form name="popForm">
+			<input type="hidden" name="cmd" value="openPop">
+			<input type="hidden" name="suppleIdx">
+		</form>
 		<div style="overflow: hidden;">
 		<div class="product-list">
 			<div style="margin-left: 5px;display: inline-block;"><h2>제품 관리</h2></div>
@@ -264,13 +280,13 @@ li:hover {
 								SuppleDTO supple = list.get(i);
 								if(supple.getCnt() > 5){
 									%>
-										<tr class="supple-tr">
+										<tr onclick="smodifySubmit('<%=supple.getIdx() %>')" class="supple-tr">
 											<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("%,d",supple.getPrice()) %></td><td><%=String.format("%,d",supple.getCnt()) %></td>
 										</tr>
 									<%
 								}else{
 									%>
-									<tr class="supple-tr under-count">
+									<tr onclick="smodifySubmit('<%=supple.getIdx() %>')" class="supple-tr under-count">
 										<td><%=supple.getIdx() %></td><td><%=supple.getCo() %></td><td><%=supple.getPid() %></td><td title="<%=supple.getName()%>"><div><%=supple.getName()%></div></td><td><div title="<%=supple.getInfo()%>"><%=supple.getInfo()%></div></td><td><%=String.format("%,d",supple.getPrice()) %></td><td><%=String.format("%,d",supple.getCnt()) %></td>
 									</tr>
 								<%
