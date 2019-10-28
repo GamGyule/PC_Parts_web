@@ -90,16 +90,32 @@ public class HomeController {
 			return "login";
 		}
 		
-		if(request.getParameter("coName") != null) {
-			//회사 이름으로 검색
-			
-			
-		}else if(request.getParameter("name") != null){
-			//부품 이름으로 검색
-			String name = request.getParameter("name");
+		if(request.getParameter("searchCompany") != null) {
+			String co = request.getParameter("searchCompany");
 
 			if (request.getParameter("page") != null) {
 				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co , page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co ,"1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.NameSuppleCnt();
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
+			
+			
+		}else if(request.getParameter("searchName") != null){
+			//부품 이름으로 검색
+			
+			String name = request.getParameter("searchName");
+			System.out.println(name);
+			
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				System.out.println(page);
 				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name , page);
 				model.addAttribute("list", Supple_list);
 			} else {
@@ -126,7 +142,7 @@ public class HomeController {
 			return "supple";
 		}
 		
-		return null;
+		
 		
 		
 	}

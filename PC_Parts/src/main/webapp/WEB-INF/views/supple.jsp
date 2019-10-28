@@ -347,8 +347,12 @@ li:hover {
 		<div style="overflow: hidden;">
 			<div class="search-box">
 				<h3>상세 검색</h3>
+				<form>
 				<input name ="searchName" class="search-box-input" type="text" placeholder="이름 검색) INTEL">
+				</form>
+				<form>
 				<input name = "searchCompany" class="search-box-input" type="text" placeholder="회사 검색) AAA">
+				</form>
 			</div>
 		</div>
 		</div>
