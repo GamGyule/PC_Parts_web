@@ -123,12 +123,6 @@ body {
 </style>
 </head>
 <body>
-	<script>
-		function test(){
-			window.open("./smodify","재고 수정","width=420,height=340,left=700,top=150,resizable=no,menubar=no");
-		}
-	</script>
-	<input type="button" value="test" onclick="test()">
 	<div class="login-page">
 		<div class="form">
 			<form class="login-form" action="./loginaction"

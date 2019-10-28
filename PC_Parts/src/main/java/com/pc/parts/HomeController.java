@@ -39,8 +39,11 @@ public class HomeController {
 	
 	@RequestMapping("/smodify")
 	public String Smodify(Model model, HttpServletRequest request) {
-		String pdIdx = request.getParameter("pdIdx");
+		String pdIdx = request.getParameter("suppleIdx");
 		
+		SuppleDTO supple = supdao.SuppleSelectIdx(pdIdx);
+		
+		model.addAttribute("supple",supple);
 		return "smodify";
 	}
 

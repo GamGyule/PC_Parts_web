@@ -27,6 +27,7 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		return sqlSession.selectOne("Supple.AllSuppleCnt");
 	}
 	@Override
+
 	public List<SuppleDTO> selectSuppleName(String Name , String spage) {
 		// TODO Auto-generated method stub
 		Map<String,String> map = new HashMap<String, String>();
@@ -56,5 +57,13 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Supple.CoSuppleCnt");
 	}
+	@Override
+	public SuppleDTO SuppleSelectIdx(String idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Supple.SuppleSelectIdx",idx);
+	}
+
+
+	
 
 }

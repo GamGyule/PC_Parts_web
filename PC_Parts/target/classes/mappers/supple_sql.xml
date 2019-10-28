@@ -33,6 +33,11 @@
     <select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO">
         select * from product where co = #{co} limit (#{page}-1)*15, 15
     </select>
+
+        <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
+        select * from product where #{idx} = idx;
+    </select>
+
     
 
 </mapper>
