@@ -70,7 +70,8 @@ input {
 	<form method="post">
 		
 		<%
-			if(supple.getIdx().substring(0,4).equals(user.getId())){
+			if(supple.getIdx().substring(0,4).equals(user.getCo())){
+				
 				%>
 					<input class="idx" type="text" value="<%=supple.getIdx()%>" readonly="on"><input class="price" type="text" value="<%=supple.getPrice()%>"><input class="price" type="text" value="<%=supple.getCnt()%>"><br><br>
 					<input class="pname" type="text" value="<%=supple.getName()%>"><br><br>

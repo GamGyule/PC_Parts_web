@@ -31,6 +31,14 @@ public class HomeController {
 
 	@Inject
 	SuppleDAOMybatis supdao;
+	
+	public boolean LoginCheck(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			return false;
+		}
+		return true;
+	}
 
 	@RequestMapping("/")
 	public String Index(Model model) {
@@ -42,15 +50,13 @@ public class HomeController {
 		String pdIdx = request.getParameter("suppleIdx");
 		
 		SuppleDTO supple = supdao.SuppleSelectIdx(pdIdx);
-		
 		model.addAttribute("supple",supple);
 		return "smodify";
 	}
 
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("user") == null) {
+		if(!LoginCheck(request)) {
 			return "login";
 		}
 		
@@ -80,6 +86,10 @@ public class HomeController {
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
+		if(!LoginCheck(request)) {
+			return "login";
+		}
+		
 		if (request.getParameter("page") != null) {
 			String page = request.getParameter("page");
 			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);

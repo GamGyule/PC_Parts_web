@@ -11,7 +11,15 @@
 	</select> -->
 	
 	 <select id="AllSuppleCnt" resultType="java.lang.Integer">
-        select count(*) from product
+        select count(*) from product 
+    </select>
+    
+    <select id="NameSuppleCnt" resultType="java.lang.Integer">
+        select count(*) from product where name like '%'#{name}'%'
+    </select>
+    
+        <select id="CoSuppleCnt" resultType="java.lang.Integer">
+        select count(*) from product where name where co = #{co}
     </select>
 
 	<select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
@@ -26,9 +34,10 @@
         select * from product where co = #{co} limit (#{page}-1)*15, 15
     </select>
 
-    	
-    <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
+        <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
         select * from product where #{idx} = idx;
     </select>
+
     
+
 </mapper>
