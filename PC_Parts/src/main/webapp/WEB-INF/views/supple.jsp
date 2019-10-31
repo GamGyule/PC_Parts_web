@@ -300,25 +300,40 @@ li:hover {
 			<div style="text-align: center">
 					<%
 						int suppleCount = 0;
+						String searchName = "";
+						String searchCompany = "";
 						int currentPage = 1;
+						
+						
 						if(request.getAttribute("SuppleCnt") != null){
 							suppleCount = (Integer)request.getAttribute("SuppleCnt");
+						}
+						
+						if(request.getParameter("searchName") != null){
+							searchName = request.getParameter("searchName");
+						}
+						
+						if(request.getParameter("searchCompany") != null){
+							searchCompany = request.getParameter("searchCompany");
 						}
 						
 						if(request.getParameter("page") != null){
 							currentPage = Integer.parseInt(request.getParameter("page"));
 						}
 						
+						String url = "./supple?";
+						url += "searchCompany"+"="+searchCompany;
+						
 						if(currentPage >= 4){
 							%>
-								<a class="list-number" href="./supple?page=1">1</a>...
+								<a class="list-number" href="<%=url %>&page=1">1</a>...
 							<%
 						}
 						
 						if(suppleCount % 15 == 0){
 							for(int i = 1; i <= suppleCount/15;i++){
 								%>
-									<a class="list-number" href="./supple?page=<%=i%>"> <%=i%></a>
+									<a class="list-number" href="<%=url %>&page=<%=i%>"> <%=i%></a>
 								<%
 							}
 						}else{
@@ -326,18 +341,18 @@ li:hover {
 								if(Math.abs(currentPage-i) <= 2){
 									if(currentPage == i){
 										%>
-											<a class="list-number current-page" href="./supple?page=<%=i%>"> <%=i%></a>
+											<a class="list-number current-page" href="<%=url %>&page=<%=i%>"> <%=i%></a>
 										<%
 									}else{
 										%>
-											<a class="list-number" href="./supple?page=<%=i%>"> <%=i%></a>
+											<a class="list-number" href="<%=url %>&page=<%=i%>"> <%=i%></a>
 										<%
 									}
 									
 								}
 							}
 							if((suppleCount/15+1 - currentPage) >= 3){
-								%>...<a class="list-number" href="./supple?page=<%=suppleCount/15+1 %>"><%=suppleCount/15+1 %></a><%
+								%>...<a class="list-number" href="<%=url %>&page=<%=suppleCount/15+1 %>"><%=suppleCount/15+1 %></a><%
 							}
 						}
 						
@@ -347,8 +362,8 @@ li:hover {
 		<div style="overflow: hidden;">
 			<div class="search-box">
 				<h3>상세 검색</h3>
-				<form>
-				<input name ="searchName" class="search-box-input" type="text" placeholder="이름 검색) INTEL">
+				<form action="./supple" method="get">
+					<input name ="searchName" class="search-box-input" type="text" placeholder="이름 검색) INTEL">
 				</form>
 				<form>
 				<input name = "searchCompany" class="search-box-input" type="text" placeholder="회사 검색) AAA">

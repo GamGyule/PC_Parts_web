@@ -17,7 +17,7 @@
 		<level value="info" />
 	</logger>
 
-	<logger name="java.sql">
+	<!-- <logger name="java.sql">
 		<level value="DEBUG" />
 		<appender-ref ref="console" />
 	</logger>
@@ -25,6 +25,6 @@
 	<root>
 		<level value="DEBUG" />
 		<appender-ref ref="console" />
-	</root>
+	</root> -->
 
 </log4j:configuration>

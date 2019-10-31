@@ -1,5 +1,6 @@
 package com.pc.parts;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -122,6 +123,8 @@ public class HomeController {
 		}
 		
 		if(request.getParameter("searchCompany") != null) {
+			
+			System.out.println("회사검색");
 			String co = request.getParameter("searchCompany");
 
 			if (request.getParameter("page") != null) {
@@ -133,16 +136,16 @@ public class HomeController {
 				model.addAttribute("list", Supple_list);
 			}
 
-			int SuppleCnt = supdao.NameSuppleCnt();
+			int SuppleCnt = supdao.CoSuppleCnt(co);
 			model.addAttribute("SuppleCnt", SuppleCnt);
 			return "supple";
 			
 			
 		}else if(request.getParameter("searchName") != null){
 			//부품 이름으로 검색
+			System.out.println("이름검색");
 			
 			String name = request.getParameter("searchName");
-			System.out.println(name);
 			
 			if (request.getParameter("page") != null) {
 				String page = request.getParameter("page");
@@ -153,26 +156,27 @@ public class HomeController {
 				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name ,"1");
 				model.addAttribute("list", Supple_list);
 			}
-
-			int SuppleCnt = supdao.NameSuppleCnt();
-			model.addAttribute("SuppleCnt", SuppleCnt);
-			return "supple";
-		}else {
-			//그냥 보여주는거
-			if (request.getParameter("page") != null) {
-				String page = request.getParameter("page");
-				System.out.println(page);
-				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
-				model.addAttribute("list", Supple_list);
-			} else {
-				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple("1");
-				model.addAttribute("list", Supple_list);
-			}
-
-			int SuppleCnt = supdao.AllSuppleCnt();
+			
+			
+			int SuppleCnt = supdao.NameSuppleCnt(name);
 			model.addAttribute("SuppleCnt", SuppleCnt);
 			return "supple";
 		}
+		
+		System.out.println("그냥 보여줌");
+		if (request.getParameter("page") != null) {
+			String page = request.getParameter("page");
+			System.out.println(page);
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
+			model.addAttribute("list", Supple_list);
+		} else {
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple("1");
+			model.addAttribute("list", Supple_list);
+		}
+
+		int SuppleCnt = supdao.AllSuppleCnt();
+		model.addAttribute("SuppleCnt", SuppleCnt);
+		return "supple";
 		
 		
 		

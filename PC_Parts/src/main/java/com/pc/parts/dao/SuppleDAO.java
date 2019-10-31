@@ -8,14 +8,16 @@ public interface SuppleDAO {
 	public List<SuppleDTO> selectSupple(String page);
 	public int AllSuppleCnt();
 
-	public int NameSuppleCnt();
-	public int CoSuppleCnt();
+	public int NameSuppleCnt(String name);
+	public int CoSuppleCnt(String co);
 	public List<SuppleDTO> selectSuppleName(String Name , String spage);
 	public List<SuppleDTO> selectSuppleCo(String Co , String spage);
 	public SuppleDTO SuppleSelectIdx(String Idx);
 	
 	public void SuppleDelete(String idx);
 	public void SuppleUpdate(SuppleDTO supple);
+	
+	//회사 and 이름 검색
 
 	
 	

@@ -125,8 +125,7 @@ body {
 <body>
 	<div class="login-page">
 		<div class="form">
-			<form class="login-form" action="./loginaction"
-				method="post">
+			<form class="login-form" action="./loginaction" method="post">
 
 				<input name="id" type="text" placeholder="아이디" />
 				<input name ="pw" type="password" placeholder="비밀번호" />

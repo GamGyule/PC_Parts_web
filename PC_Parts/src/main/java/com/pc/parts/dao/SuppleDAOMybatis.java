@@ -28,14 +28,13 @@ public class SuppleDAOMybatis implements SuppleDAO {
 	}
 	@Override
 
-	public List<SuppleDTO> selectSuppleName(String Name , String spage) {
+	public List<SuppleDTO> selectSuppleName(String name , String spage) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String, Object>();
-		int page = (Integer.parseInt(spage)-1);
-		map.put("name", Name);
-		map.put("spage", page);
-		
-		System.out.println(map.get("spage"));
+		int page = (Integer.parseInt(spage)-1)*15;
+		map.put("name", name);
+		map.put("page", page);
+
 		return sqlSession.selectList("Supple.SuppleSelectName" , map);
 	}
 	@Override
@@ -45,19 +44,25 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		int page = (Integer.parseInt(spage)-1)*15;
 
 		map.put("co", Co);
-		map.put("spage", page);
+		map.put("page", page);
 		return sqlSession.selectList("Supple.SuppleSelectCo" , map);
 	}
 	@Override
-	public int NameSuppleCnt() {
+	public int NameSuppleCnt(String name) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Supple.NameSuppleCnt");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("name", name);
+		
+		return sqlSession.selectOne("Supple.NameSuppleCnt",map);
 	}
 	@Override
-	public int CoSuppleCnt() {
+	public int CoSuppleCnt(String co) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Supple.CoSuppleCnt");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("co", co);
+		return sqlSession.selectOne("Supple.CoSuppleCnt",map);
 	}
+	
 	@Override
 	public SuppleDTO SuppleSelectIdx(String idx) {
 		// TODO Auto-generated method stub
