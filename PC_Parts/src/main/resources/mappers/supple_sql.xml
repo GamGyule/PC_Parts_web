@@ -27,7 +27,7 @@
     </select>
     
     <select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
-        <![CDATA[ select * from product where name like CONCAT('%',#{name},'%') limit (#{spage}-1)*15, 15]]>
+        <![CDATA[ select * from product where name like CONCAT('%',#{name},'%') limit #{spage}*15,15]]>
     </select>
     	
     <select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">

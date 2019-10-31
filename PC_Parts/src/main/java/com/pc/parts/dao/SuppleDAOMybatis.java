@@ -31,9 +31,11 @@ public class SuppleDAOMybatis implements SuppleDAO {
 	public List<SuppleDTO> selectSuppleName(String Name , String spage) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String, Object>();
-		int page = (Integer.parseInt(spage)-1)*15;
+		int page = (Integer.parseInt(spage)-1);
 		map.put("name", Name);
 		map.put("spage", page);
+		
+		System.out.println(map.get("spage"));
 		return sqlSession.selectList("Supple.SuppleSelectName" , map);
 	}
 	@Override

@@ -130,6 +130,7 @@ public class HomeController {
 			//그냥 보여주는거
 			if (request.getParameter("page") != null) {
 				String page = request.getParameter("page");
+				System.out.println(page);
 				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
 				model.addAttribute("list", Supple_list);
 			} else {
