@@ -13,6 +13,9 @@ public interface SuppleDAO {
 	public List<SuppleDTO> selectSuppleName(String Name , String spage);
 	public List<SuppleDTO> selectSuppleCo(String Co , String spage);
 	public SuppleDTO SuppleSelectIdx(String Idx);
+	
+	public void SuppleDelete(String idx);
+	public void SuppleUpdate(SuppleDTO supple);
 
 	
 	

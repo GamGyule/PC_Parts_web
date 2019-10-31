@@ -57,6 +57,37 @@ input {
 	height:40px;
 }
 </style>
+<script>
+	function SDelete(idx){
+		var myForm = document.SDeleteForm;
+		var url = "/sdelete";
+		myForm.action = url;
+		myForm.method = "post";
+		myForm.suppleIdx.value = idx;
+		myForm.submit();
+		
+		opener.location.reload();
+		
+		window.close();
+	}
+	
+	function SUpdate(idx){
+		var myForm = document.SDeleteForm;
+		var url = "/supdate";
+		myForm.action = url;
+		myForm.method = "post";
+		myForm.suppleIdx.value = idx;
+		
+		myForm.supplePrice.value = document.querySelector("#sPrice").value;
+		myForm.suppleCount.value = document.querySelector("#sCnt").value;
+		myForm.suppleName.value = document.querySelector("#sName").value;
+		myForm.suppleInfo.value = document.querySelector("#sInfo").value;
+		
+		myForm.submit();
+		opener.location.reload();
+		window.close();
+	}
+</script>
 </head>
 <body>
 <%
@@ -67,17 +98,24 @@ input {
 	CompanyDTO user = (CompanyDTO)session.getAttribute("user");
 %>
 	<div class="input-area">
-	<form method="post">
+		<form name="SDeleteForm">
+			<input type="hidden" name="suppleIdx">
+			
+			<input type="hidden" name="supplePrice">
+			<input type="hidden" name="suppleCount">
+			<input type="hidden" name="suppleName">
+			<input type="hidden" name="suppleInfo">
+		</form>
 		
 		<%
 			if(supple.getIdx().substring(0,4).equals(user.getCo())){
 				
 				%>
-					<input class="idx" type="text" value="<%=supple.getIdx()%>" readonly="on"><input class="price" type="text" value="<%=supple.getPrice()%>"><input class="price" type="text" value="<%=supple.getCnt()%>"><br><br>
-					<input class="pname" type="text" value="<%=supple.getName()%>"><br><br>
-					<textarea class="pcontent"><%=supple.getInfo()%></textarea>
+					<input class="idx" type="text" value="<%=supple.getIdx()%>" readonly="on"><input class="price" id="sPrice" type="text" value="<%=supple.getPrice()%>"><input class="price" id="sCnt" type="text" value="<%=supple.getCnt()%>"><br><br>
+					<input class="pname" id="sName" type="text" value="<%=supple.getName()%>"><br><br>
+					<textarea id="sInfo" class="pcontent"><%=supple.getInfo()%></textarea>
 					<div class="btn-area">
-					<input class="pbtn" type="button" value="삭제">	<input class="pbtn" type="button" value="수정">	<input class="pbtn" onclick="window.close()" type="button" value="닫기">
+					<input class="pbtn" onclick="SDelete('<%=supple.getIdx() %>')" type="button" value="삭제">	<input class="pbtn" onclick="SUpdate('<%=supple.getIdx() %>')" type="button" value="수정">	<input class="pbtn" onclick="window.close()" type="button" value="닫기">
 				<%
 			}else{
 				%>
@@ -91,7 +129,7 @@ input {
 		%>
 			
 		</div>
-	</form>
+
 	</div>
 	
 </body>

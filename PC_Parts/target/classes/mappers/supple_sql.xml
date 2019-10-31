@@ -34,8 +34,16 @@
         <![CDATA[ select * from product where co = #{co} limit (#{spage}-1)*15, 15]]>
     </select>
 
-      <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
+    <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
         select * from product where #{idx} = idx;
+    </select>
+    
+    <delete id="SuppleDelete" parameterType="java.lang.String">
+    	<![CDATA[ delete from product where idx = #{idx} ]]>
+    </delete>
+    
+    <select id="SuppleUpdate" parameterType="map">
+    	<![CDATA[ update product set name = #{name},info = #{info},price = #{price},count=#{count} where idx = #{idx}]]>
     </select>
 
 </mapper>

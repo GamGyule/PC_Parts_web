@@ -61,6 +61,23 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Supple.SuppleSelectIdx",idx);
 	}
+	@Override
+	public void SuppleDelete(String idx) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("Supple.SuppleDelete",idx);
+	}
+	@Override
+	public void SuppleUpdate(SuppleDTO supple) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("idx",supple.getIdx());
+		map.put("price",supple.getPrice());
+		map.put("count",supple.getCnt());
+		map.put("name",supple.getName());
+		map.put("info",supple.getInfo());
+		sqlSession.update("Supple.SuppleUpdate",map);
+	}
 
 
 	
