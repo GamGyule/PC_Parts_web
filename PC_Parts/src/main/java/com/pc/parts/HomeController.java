@@ -45,8 +45,39 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping("/sdelete")
+	public void Sdelete(HttpServletRequest request) {
+		String idx = request.getParameter("suppleIdx");
+		System.out.println("Delete > " + idx);
+		supdao.SuppleDelete(idx);
+	}
+	
+	@RequestMapping("/supdate")
+	public void Supdate(HttpServletRequest request) {
+		String idx = request.getParameter("suppleIdx");
+		
+		String price = request.getParameter("supplePrice");
+		String count = request.getParameter("suppleCount");
+		String name = request.getParameter("suppleName");
+		String info = request.getParameter("suppleInfo");
+		
+		int i_price = Integer.parseInt(price);
+		int i_count = Integer.parseInt(count);
+		
+		
+		
+		SuppleDTO supple = new SuppleDTO(idx, 0, "update", name, info, i_price, i_count);
+		System.out.println("Update > " + supple.getIdx());
+		System.out.println(supple.getIdx());
+		supdao.SuppleUpdate(supple);
+	}
+	
 	@RequestMapping("/smodify")
 	public String Smodify(Model model, HttpServletRequest request) {
+		if(!LoginCheck(request)) {
+			return "login";
+		}
+		
 		String pdIdx = request.getParameter("suppleIdx");
 		
 		SuppleDTO supple = supdao.SuppleSelectIdx(pdIdx);

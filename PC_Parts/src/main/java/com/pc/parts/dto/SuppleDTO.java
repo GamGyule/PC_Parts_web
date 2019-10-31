@@ -66,4 +66,14 @@ public class SuppleDTO {
 		this.count = cnt;
 	}
 
+	public SuppleDTO(String idx, int pid, String co, String name, String info, int price, int count) {
+		this.idx = idx;
+		this.pid = pid;
+		this.co = co;
+		this.name = name;
+		this.info = info;
+		this.price = price;
+		this.count = count;
+	}	
+
 }
