@@ -137,7 +137,7 @@ li:hover {
 				<a href="./supple"><li>재고 관리</li></a>
 				<a href="javascript:;"><li>입·출고 관리</li></a>
 				<a href="javascript:;"><li>통계 관리</li></a>
-				<a href="javascript:;"><li>재고 요청</li></a>
+				<a href="./noti"><li>재고 요청</li></a>
 			</ul>
 		</div>
 		<div class="noti-area">

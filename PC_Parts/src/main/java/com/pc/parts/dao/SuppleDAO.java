@@ -17,8 +17,9 @@ public interface SuppleDAO {
 	public void SuppleDelete(String idx);
 	public void SuppleUpdate(SuppleDTO supple);
 	
-	//회사 and 이름 검색
-
+	
+	public int CoNameSuppleCnt(String co, String name);
+	public List<SuppleDTO> selectSuppleCoName(String co ,String name , String page);
 	
 	
 }

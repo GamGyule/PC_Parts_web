@@ -15,7 +15,7 @@
     </select>
     
 	<select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
-        <![CDATA[ select * from product limit #{page}, 15]]>
+        <![CDATA[ select * from product limit #{page}, 20]]>
     </select>
     
     
@@ -25,7 +25,7 @@
     </select>
     
     <select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
-        <![CDATA[ select * from product where name like '%${name}%' limit #{page}, 15 ]]>
+        <![CDATA[ select * from product where name like '%${name}%' limit #{page}, 20 ]]>
     </select>
     
     
@@ -35,7 +35,17 @@
     </select>
     
     <select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
-        <![CDATA[ select * from product where co like '%${co}%' limit #{page}, 15]]>
+        <![CDATA[ select * from product where co like '%${co}%' limit #{page}, 20]]>
+    </select>
+    
+    
+    
+    <select id="CoNameSuppleCnt" resultType="java.lang.Integer" parameterType="map">
+        select count(*) from product where co like '%${co}%' and name like '%${name}%'
+    </select>
+    
+    <select id="SuppleSelectCoName" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
+        <![CDATA[ select * from product where co like '%${co}%' and name like '%${name}%' limit #{page}, 20]]>
     </select>
     
      

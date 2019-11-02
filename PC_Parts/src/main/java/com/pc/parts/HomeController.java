@@ -32,10 +32,10 @@ public class HomeController {
 
 	@Inject
 	SuppleDAOMybatis supdao;
-	
+
 	public boolean LoginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user") == null) {
+		if (session.getAttribute("user") == null) {
 			return false;
 		}
 		return true;
@@ -45,53 +45,51 @@ public class HomeController {
 	public String Index(Model model) {
 		return "login";
 	}
-	
+
 	@RequestMapping("/sdelete")
 	public void Sdelete(HttpServletRequest request) {
 		String idx = request.getParameter("suppleIdx");
 		System.out.println("Delete > " + idx);
 		supdao.SuppleDelete(idx);
 	}
-	
+
 	@RequestMapping("/supdate")
 	public void Supdate(HttpServletRequest request) {
 		String idx = request.getParameter("suppleIdx");
-		
+
 		String price = request.getParameter("supplePrice");
 		String count = request.getParameter("suppleCount");
 		String name = request.getParameter("suppleName");
 		String info = request.getParameter("suppleInfo");
-		
+
 		int i_price = Integer.parseInt(price);
 		int i_count = Integer.parseInt(count);
-		
-		
-		
+
 		SuppleDTO supple = new SuppleDTO(idx, 0, "update", name, info, i_price, i_count);
 		System.out.println("Update > " + supple.getIdx());
 		System.out.println(supple.getIdx());
 		supdao.SuppleUpdate(supple);
 	}
-	
+
 	@RequestMapping("/smodify")
 	public String Smodify(Model model, HttpServletRequest request) {
-		if(!LoginCheck(request)) {
+		if (!LoginCheck(request)) {
 			return "login";
 		}
-		
+
 		String pdIdx = request.getParameter("suppleIdx");
-		
+
 		SuppleDTO supple = supdao.SuppleSelectIdx(pdIdx);
-		model.addAttribute("supple",supple);
+		model.addAttribute("supple", supple);
 		return "smodify";
 	}
 
 	@RequestMapping("/home")
 	public String Home(Model model, HttpServletRequest request) {
-		if(!LoginCheck(request)) {
+		if (!LoginCheck(request)) {
 			return "login";
 		}
-		
+
 		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
 		model.addAttribute("noti_list", noti_list);
 		return "home";
@@ -118,51 +116,68 @@ public class HomeController {
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
-		if(!LoginCheck(request)) {
+		if (!LoginCheck(request)) {
 			return "login";
 		}
-		
-		if(request.getParameter("searchCompany") != null) {
-			
+
+		if (request.getParameter("searchCompany") != null && request.getParameter("searchName") != null) {
+
+			System.out.println("회사검색 및 이름 검색");
+			String co = request.getParameter("searchCompany");
+			String name = request.getParameter("searchName");
+
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCoName(co, name, page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCoName(co, name, "1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.CoNameSuppleCnt(co, name);
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
+
+		}else if (request.getParameter("searchCompany") != null && request.getParameter("searchName") == null) {
+
 			System.out.println("회사검색");
 			String co = request.getParameter("searchCompany");
 
 			if (request.getParameter("page") != null) {
 				String page = request.getParameter("page");
-				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co , page);
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co, page);
 				model.addAttribute("list", Supple_list);
 			} else {
-				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co ,"1");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co, "1");
 				model.addAttribute("list", Supple_list);
 			}
 
 			int SuppleCnt = supdao.CoSuppleCnt(co);
 			model.addAttribute("SuppleCnt", SuppleCnt);
 			return "supple";
-			
-			
-		}else if(request.getParameter("searchName") != null){
-			//부품 이름으로 검색
+
+		} else if (request.getParameter("searchCompany") == null && request.getParameter("searchName") != null) {
+			// 부품 이름으로 검색
 			System.out.println("이름검색");
-			
+
 			String name = request.getParameter("searchName");
-			
+
 			if (request.getParameter("page") != null) {
 				String page = request.getParameter("page");
 				System.out.println(page);
-				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name , page);
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name, page);
 				model.addAttribute("list", Supple_list);
 			} else {
-				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name ,"1");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name, "1");
 				model.addAttribute("list", Supple_list);
 			}
-			
-			
+
 			int SuppleCnt = supdao.NameSuppleCnt(name);
 			model.addAttribute("SuppleCnt", SuppleCnt);
 			return "supple";
 		}
-		
+
 		System.out.println("그냥 보여줌");
 		if (request.getParameter("page") != null) {
 			String page = request.getParameter("page");
@@ -177,13 +192,10 @@ public class HomeController {
 		int SuppleCnt = supdao.AllSuppleCnt();
 		model.addAttribute("SuppleCnt", SuppleCnt);
 		return "supple";
-		
-		
-		
-		
+
 	}
 
-	@RequestMapping("/home/noti")
+	@RequestMapping("/noti")
 	public String Noti(Model model) {
 
 		return "noti";

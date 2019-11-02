@@ -175,6 +175,7 @@ li:hover {
 	width: 450px;
 	min-width: 450px;
 }
+
 .product_table td:nth-child(3) {
 	text-align: center;
 }
@@ -220,14 +221,26 @@ li:hover {
 
 .list-number {
 	display: inline-block;
-	text-align:center;
-	line-height:20px;
-	width : 20px;
+	text-align: center;
+	line-height: 20px;
+	width: 20px;
 	height: 20px;
 	border: 1px solid black;
 	border-radius: 3px;
-
 }
+
+.search-box-btn {
+	width: 100%;
+	height: 40px;
+	background-color: #FDCB6E;
+	border: 0px;
+	outline: none;	
+}
+.search-box-btn:hover{
+	cursor: pointer;
+	background-color: #fcdb9d;
+}
+
 </style>
 <script>
 	function smodifySubmit(idx){
@@ -253,10 +266,10 @@ li:hover {
 		<div style="float: left; height: 100%; display: inline-block;">
 			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
 				<a href="./home"><li>홈</li></a>
-				<a href="javascript:;"><li class="tab-select">재고 관리</li></a>
+				<a href="./supple"><li class="tab-select">재고 관리</li></a>
 				<a href="javascript:;"><li>입·출고 관리</li></a>
 				<a href="javascript:;"><li>통계 관리</li></a>
-				<a href="javascript:;"><li>재고 요청</li></a>
+				<a href="./noti"><li>재고 요청</li></a>
 			</ul>
 		</div>
 		<form name="popForm">
@@ -267,7 +280,7 @@ li:hover {
 		<div class="product-list">
 			<div style="margin-left: 5px;display: inline-block;"><h2>제품 관리</h2></div>
 			<br>
-			<div style="display: inline-block;min-height: 574px;">
+			<div style="display: inline-block;min-height: 727px;">
 				<table id="indexTable" class="product_table" style="table-layout: fixed;">
 					<thead>
 						<th onClick="SortTable(0,'T');">번호</th><th onclick="SortTable(1,'T');">회사</th><th onclick="SortTable(2,'N');">부품</th><th onclick="SortTable(3,'T');">제품 이름</th><th onclick="SortTable(4,'T');">제품 설명</th><th onclick="SortTable(5,'N');">가격</th><th onclick="SortTable(6,'N');">개수</th>
@@ -304,6 +317,7 @@ li:hover {
 						String searchCompany = "";
 						int currentPage = 1;
 						
+						String url = "./supple?";
 						
 						if(request.getAttribute("SuppleCnt") != null){
 							suppleCount = (Integer)request.getAttribute("SuppleCnt");
@@ -311,48 +325,48 @@ li:hover {
 						
 						if(request.getParameter("searchName") != null){
 							searchName = request.getParameter("searchName");
+							url += "searchName"+"="+searchName+"&";
 						}
 						
 						if(request.getParameter("searchCompany") != null){
 							searchCompany = request.getParameter("searchCompany");
+							url += "searchCompany"+"="+searchCompany+"&";
 						}
 						
 						if(request.getParameter("page") != null){
 							currentPage = Integer.parseInt(request.getParameter("page"));
 						}
 						
-						String url = "./supple?";
-						url += "searchCompany"+"="+searchCompany;
 						
 						if(currentPage >= 4){
 							%>
-								<a class="list-number" href="<%=url %>&page=1">1</a>...
+								<a class="list-number" href="<%=url %>page=1">1</a>...
 							<%
 						}
 						
-						if(suppleCount % 15 == 0){
-							for(int i = 1; i <= suppleCount/15;i++){
+						if(suppleCount % 20 == 0){
+							for(int i = 1; i <= suppleCount/20;i++){
 								%>
-									<a class="list-number" href="<%=url %>&page=<%=i%>"> <%=i%></a>
+									<a class="list-number" href="<%=url %>page=<%=i%>"> <%=i%></a>
 								<%
 							}
 						}else{
-							for(int i = 1; i <= suppleCount/15+1;i++){
+							for(int i = 1; i <= suppleCount/20+1;i++){
 								if(Math.abs(currentPage-i) <= 2){
 									if(currentPage == i){
 										%>
-											<a class="list-number current-page" href="<%=url %>&page=<%=i%>"> <%=i%></a>
+											<a class="list-number current-page" href="<%=url %>page=<%=i%>"> <%=i%></a>
 										<%
 									}else{
 										%>
-											<a class="list-number" href="<%=url %>&page=<%=i%>"> <%=i%></a>
+											<a class="list-number" href="<%=url %>page=<%=i%>"> <%=i%></a>
 										<%
 									}
 									
 								}
 							}
-							if((suppleCount/15+1 - currentPage) >= 3){
-								%>...<a class="list-number" href="<%=url %>&page=<%=suppleCount/15+1 %>"><%=suppleCount/15+1 %></a><%
+							if((suppleCount/20+1 - currentPage) >= 3){
+								%>...<a class="list-number" href="<%=url %>page=<%=suppleCount/20+1 %>"><%=suppleCount/20+1 %></a><%
 							}
 						}
 						
@@ -363,10 +377,9 @@ li:hover {
 			<div class="search-box">
 				<h3>상세 검색</h3>
 				<form action="./supple" method="get">
-					<input name ="searchName" class="search-box-input" type="text" placeholder="이름 검색) INTEL">
-				</form>
-				<form>
-				<input name = "searchCompany" class="search-box-input" type="text" placeholder="회사 검색) AAA">
+					<input name ="searchName" class="search-box-input" type="text" placeholder="이름 검색) INTEL" value="<%=searchName%>">
+					<input name = "searchCompany" class="search-box-input" type="text" placeholder="회사 검색) AAAA" value="<%=searchCompany%>">
+					<input class="search-box-btn" type="submit" value="검색하기">
 				</form>
 			</div>
 		</div>
