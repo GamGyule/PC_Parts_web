@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.pc.parts.dto.SuppleDTO,java.util.List"%>
+<%@page import="com.pc.parts.dto.NotiDTO,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -252,7 +253,17 @@ li:hover {
 <meta charset="UTF-8">
 <title>관리하자</title>
 </head>
+
+
 <body style="margin: 0; padding: 0;">
+	<%
+	int noti_cnt = 0;
+	List<NotiDTO> noti_listAll = null;
+	if (request.getAttribute("noti_listAll") != null) {
+		noti_listAll = (List<NotiDTO>) request.getAttribute("noti_listAll");
+		noti_cnt = noti_listAll.size();
+	}
+	%>
 	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
 		<img width="50" src="images/admin_icon.png"/><span>PC_Parts 관리자</span>
 	</div>
@@ -278,9 +289,25 @@ li:hover {
 						<th onClick="SortTable(0,'T');">날짜</th><th onclick="SortTable(1,'T');">상품 번호</th><th onclick="SortTable(2,'T');">상품 이름</th><th onclick="SortTable(3,'N');">요청 개수</th><th>처리 현황</th><th>비고</th>
 					</thead>
 					<tbody>
+					<%
+					for(int i = 0; i <= noti_cnt; i++) {
+						NotiDTO noti = noti_listAll.get(i);
+						
+						if(noti.getTo_co().equals(request.getAttribute("user"))){
+							if(noti.getFlag() == 0){
+								%>
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
+								<%
+							}else{
+								
+							}
+						}
+					}
+					
+					%>
 						<tr class="supple-tr"><td>2019-10-21 11:10</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr>
 						<tr class="supple-tr"><td>2019-10-21 11:27</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
-						<tr class="supple-tr"><td>2019-10-21 11:28</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
+						<tr class="supple-tr"><td>2019-10-21 11:28</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>d
 						<tr class="supple-tr"><td>2019-10-21 11:29</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="취소"></td></tr>
 						<tr class="supple-tr"><td>2019-10-21 11:30</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
 					</tbody>

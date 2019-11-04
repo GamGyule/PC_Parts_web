@@ -5,17 +5,31 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Noti">
-	<!-- <select id="getAll" resultType="com.gamgyul.gams.dto.CustomerDTO">
-		select * from customer
-	</select> -->
-	
-	 <select id="AllSuppleCnt" resultType="java.lang.Integer">
-        select count(*) from product 
-    </select>
-    
-	<select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
-        <![CDATA[ select * from product limit #{page}, 20]]>
-    </select>
+<mapper namespace="Notice">
+	<!-- <select id="getAll" resultType="com.gamgyul.gams.dto.CustomerDTO"> 
+		select * from customer </select> -->
+	<insert id="notiInsert" parameterType="com.pc.parts.dto.NotiDTO">
+		insert into values(
+		#{date},
+		#{idx},
+		#{from_co},
+		#{to_co},
+		#{pid},
+		#{cnt}]
+		)
 
+	</insert>
+	<select id="notiSelectAll" resultType="com.pc.parts.dto.NotiDTO" parameterType="java.lang.String">
+		select *, product.name from noti, product where from_co = #{co} or to_co = #{co} and #{pid} = product.pid;
+	</select>
+
+	<select id="notiCountMain" resultType="com.pc.parts.dto.NotiDTO">
+		select * from noti where flag = 0;
+	</select>
+	
+	
+	
+	<update id="notiflag" parameterType="java.lang.Integer">
+		update noti set flag = 1 where idx = #{idx};
+	</update>
 </mapper>

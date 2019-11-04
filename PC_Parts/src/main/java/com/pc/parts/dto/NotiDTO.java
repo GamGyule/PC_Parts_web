@@ -1,5 +1,8 @@
 package com.pc.parts.dto;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NotiDTO {
 	
 	private int idx;
@@ -7,7 +10,19 @@ public class NotiDTO {
 	private String to_co;
 	private int pid;
 	private int cnt;
+	private int flag;
+	private Date date;
+	private String pd_name;
 	
+	SimpleDateFormat local_date = new SimpleDateFormat("yyyy-MM-dd HH-mm");
+	
+	
+	public String getDate() {
+		return local_date.format(date);
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public int getIdx() {
 		return idx;
 	}
@@ -38,6 +53,22 @@ public class NotiDTO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	public String getPd_name() {
+		return pd_name;
+	}
+	public void setPd_name(String pd_name) {
+		this.pd_name = pd_name;
+	}
+	
+	
+	
+	
 
 	
 }

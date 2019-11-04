@@ -6,5 +6,7 @@ import com.pc.parts.dto.NotiDTO;
 
 public interface NotiDAO {
 	public void NotiInsert(NotiDTO noti);
-	public List<NotiDTO> selectNoti();
+	public List<NotiDTO> selectNoti(String co);
+	public List<NotiDTO>  selectNotiMain();
+	public void NotiFlag(int idx);
 }

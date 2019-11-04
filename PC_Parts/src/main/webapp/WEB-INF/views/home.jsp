@@ -124,6 +124,11 @@ li:hover {
 		noti_list = (List<NotiDTO>) request.getAttribute("noti_list");
 		noti_cnt = noti_list.size();
 	}
+	int supLow_cnt = 0;
+	if(request.getAttribute("suppleLow") != null) {
+		supLow_cnt = (Integer)request.getAttribute("suppleLow");
+	}
+	
 %>
 <body style="margin: 0; padding: 0;">
 	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
@@ -151,7 +156,7 @@ li:hover {
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;">2</a></span></div>
+				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=supLow_cnt %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>

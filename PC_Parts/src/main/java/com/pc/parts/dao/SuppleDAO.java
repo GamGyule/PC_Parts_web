@@ -20,6 +20,7 @@ public interface SuppleDAO {
 	
 	public int CoNameSuppleCnt(String co, String name);
 	public List<SuppleDTO> selectSuppleCoName(String co ,String name , String page);
+	public int SuppleSelectLow();
 	
 	
 }

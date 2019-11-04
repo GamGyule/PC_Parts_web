@@ -90,9 +90,14 @@ public class HomeController {
 			return "login";
 		}
 
-		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
+		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNotiMain();
 		model.addAttribute("noti_list", noti_list);
+		
+		int suppleLow = supdao.SuppleSelectLow();
+		model.addAttribute("suppleLow",suppleLow);
 		return "home";
+		
+		
 	}
 
 	@RequestMapping("/loginaction")
@@ -106,13 +111,7 @@ public class HomeController {
 		return "formaction/loginAction";
 	}
 
-	@RequestMapping("/main")
-	public String Main(Model model, HttpServletRequest request) {
-		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNoti();
 
-		model.addAttribute("noti_list", noti_list);
-		return "home";
-	}
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
@@ -196,8 +195,13 @@ public class HomeController {
 	}
 
 	@RequestMapping("/noti")
-	public String Noti(Model model) {
-
+	public String Noti(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		CompanyDTO user = (CompanyDTO) session.getAttribute("user");
+		
+		List<NotiDTO> Noti_listAll = (List<NotiDTO>) notidao.selectNoti(user.getCo());
+		model.addAttribute("noti_listAll" , Noti_listAll);
+		model.addAttribute("user",user.getCo());
 		return "noti";
 
 	}

@@ -106,6 +106,11 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		map.put("page", page);
 		return sqlSession.selectList("Supple.SuppleSelectCoName" , map);
 	}
+	@Override
+	public int SuppleSelectLow() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Supple.SuppleSelectLow");
+	}
 
 
 	

@@ -63,5 +63,9 @@
     <select id="SuppleUpdate" parameterType="map">
     	<![CDATA[ update product set name = #{name},info = #{info},price = #{price},count=#{count} where idx = #{idx}]]>
     </select>
+    
+    <select id="SuppleSelectLow" resultType="java.lang.Integer">
+        <![CDATA[ select count(*) from product where count <= 5]]>
+    </select>
 
 </mapper>

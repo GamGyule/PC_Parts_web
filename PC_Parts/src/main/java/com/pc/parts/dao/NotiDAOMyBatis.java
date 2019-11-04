@@ -20,9 +20,20 @@ public class NotiDAOMyBatis implements NotiDAO {
 		sqlSession.insert("Notice.notiInsert" ,noti);
 	}
 	@Override
-	public List<NotiDTO> selectNoti() {
+	public List<NotiDTO> selectNoti(String co) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Notice.notiSelectAll");
+		return sqlSession.selectList("Notice.notiSelectAll",co);
+	}
+	@Override
+	public List<NotiDTO> selectNotiMain() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Notice.notiCountMain");
+	}
+	@Override
+	public void NotiFlag(int idx) {
+		// TODO Auto-generated method stub
+		sqlSession.update("Supple.SuppleUpdate",idx);
+		
 	}
 
 }
