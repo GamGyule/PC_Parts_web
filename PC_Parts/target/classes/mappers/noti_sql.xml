@@ -20,7 +20,11 @@
 
 	</insert>
 	<select id="notiSelectAll" resultType="com.pc.parts.dto.NotiDTO" parameterType="java.lang.String">
-		select *, product.name from noti, product where from_co = #{co} or to_co = #{co} and #{pid} = product.pid;
+		select * from noti where from_co = #{co} or to_co = #{co}
+	</select>
+	
+		<select id="notiSelectName" resultType="String" parameterType="java.lang.Integer">
+		select distinct name from product where pid = #{pid}
 	</select>
 
 	<select id="notiCountMain" resultType="com.pc.parts.dto.NotiDTO">

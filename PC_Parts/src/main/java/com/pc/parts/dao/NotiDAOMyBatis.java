@@ -1,12 +1,15 @@
 package com.pc.parts.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pc.parts.dto.NotiDTO;
+import com.pc.parts.dto.SuppleDTO;
 
 @Repository
 public class NotiDAOMyBatis implements NotiDAO {
@@ -23,6 +26,11 @@ public class NotiDAOMyBatis implements NotiDAO {
 	public List<NotiDTO> selectNoti(String co) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Notice.notiSelectAll",co);
+	}
+	@Override
+	public String selectname(int pid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Notice.notiSelectName",pid);
 	}
 	@Override
 	public List<NotiDTO> selectNotiMain() {

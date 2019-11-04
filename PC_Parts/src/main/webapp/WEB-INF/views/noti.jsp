@@ -290,7 +290,8 @@ li:hover {
 					</thead>
 					<tbody>
 					<%
-					for(int i = 0; i <= noti_cnt; i++) {
+					System.out.println(noti_listAll.toString());
+					for(int i = 0; i <= noti_listAll.size()-1; i++) {
 						NotiDTO noti = noti_listAll.get(i);
 						
 						if(noti.getTo_co().equals(request.getAttribute("user"))){
@@ -299,17 +300,19 @@ li:hover {
 									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
 								<%
 							}else{
-								
+								%>
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr>
+								<%
 							}
 						}
 					}
 					
 					%>
-						<tr class="supple-tr"><td>2019-10-21 11:10</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr>
+<!-- 						<tr class="supple-tr"><td>2019-10-21 11:10</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr>
 						<tr class="supple-tr"><td>2019-10-21 11:27</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
-						<tr class="supple-tr"><td>2019-10-21 11:28</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>d
+						<tr class="supple-tr"><td>2019-10-21 11:28</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
 						<tr class="supple-tr"><td>2019-10-21 11:29</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="취소"></td></tr>
-						<tr class="supple-tr"><td>2019-10-21 11:30</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
+						<tr class="supple-tr"><td>2019-10-21 11:30</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr> -->
 					</tbody>
 				</table>
 			</div>

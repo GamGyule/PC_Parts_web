@@ -1,7 +1,8 @@
 package com.pc.parts.dto;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class NotiDTO {
 	
@@ -17,8 +18,8 @@ public class NotiDTO {
 	SimpleDateFormat local_date = new SimpleDateFormat("yyyy-MM-dd HH-mm");
 	
 	
-	public String getDate() {
-		return local_date.format(date);
+	public Date getDate() {
+		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;

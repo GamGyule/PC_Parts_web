@@ -1,6 +1,6 @@
 package com.pc.parts;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -200,6 +200,15 @@ public class HomeController {
 		CompanyDTO user = (CompanyDTO) session.getAttribute("user");
 		
 		List<NotiDTO> Noti_listAll = (List<NotiDTO>) notidao.selectNoti(user.getCo());
+		ArrayList<String> Noti_name = new ArrayList<String>();
+		
+		for(int i = 0; i < Noti_listAll.size(); i++) {
+			Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid()));
+		}
+		
+		for(String temp : Noti_name){
+			System.out.println(temp);
+		}
 		model.addAttribute("noti_listAll" , Noti_listAll);
 		model.addAttribute("user",user.getCo());
 		return "noti";
