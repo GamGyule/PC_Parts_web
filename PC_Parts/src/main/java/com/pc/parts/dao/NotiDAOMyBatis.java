@@ -38,9 +38,13 @@ public class NotiDAOMyBatis implements NotiDAO {
 		return sqlSession.selectList("Notice.notiCountMain");
 	}
 	@Override
-	public void NotiFlag(int idx) {
+	public void NotiFlag(int idx , int flag) {
 		// TODO Auto-generated method stub
-		sqlSession.update("Supple.SuppleUpdate",idx);
+		Map<String,Object> map = new HashMap<String, Object>();
+
+		map.put("idx", idx);
+		map.put("flag", flag);
+		sqlSession.update("Notice.notiflag",map);
 		
 	}
 

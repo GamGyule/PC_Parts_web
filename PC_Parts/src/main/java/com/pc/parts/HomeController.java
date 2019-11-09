@@ -109,6 +109,24 @@ public class HomeController {
 		model.addAttribute("list", companyDtoList);
 		return "formaction/loginAction";
 	}
+	
+	@RequestMapping("/updateaction")
+	public String flagUpdate(Model model, HttpServletRequest request) {
+		String flagUpdate = request.getParameter("flagUpdate");
+		String flagUpdate2 = request.getParameter("flagUpdate2");
+		if(flagUpdate != null) {
+			int idx = Integer.parseInt(flagUpdate);
+			System.out.println("update > " + idx);
+			notidao.NotiFlag(idx , 1);
+		}else {
+			int idx = Integer.parseInt(flagUpdate2);
+			System.out.println("update > " + idx);
+			notidao.NotiFlag(idx , 2);
+		}
+		
+
+		return "formaction/updateaction";
+	}
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {

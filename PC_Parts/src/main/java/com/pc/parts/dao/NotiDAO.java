@@ -10,5 +10,5 @@ public interface NotiDAO {
 	public List<NotiDTO> selectNoti(String co);
 	public String selectname(int pid);
 	public List<NotiDTO>  selectNotiMain();
-	public void NotiFlag(int idx);
+	public void NotiFlag(int idx , int flag);
 }

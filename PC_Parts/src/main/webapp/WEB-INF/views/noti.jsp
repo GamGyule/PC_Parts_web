@@ -249,6 +249,15 @@ li:hover {
 }
 
 </style>
+<script>
+	function flagupdate(idx){
+		alert(idx)
+		var myForm = document.flagUpdate;
+		var url = "/home";
+		myForm.action = url;
+		myForm.method = "post";
+	}
+</script>
 
 <meta charset="UTF-8">
 <title>관리하자</title>
@@ -300,9 +309,19 @@ li:hover {
 						if(noti.getTo_co().equals(request.getAttribute("user"))){
 							if(noti.getFlag() == 0){
 								%>
-									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
+									<form  action="./updateaction">
+									<input type="hidden" name="flagUpdate" value="<%=noti.getIdx()%>">
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">수락</button></td></tr>
+									
+									</form>
 								<%
-							}else{
+							}else if(noti.getFlag()==2){
+								%>
+								<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>취소됨</td><td>-</td></tr>
+							
+							<%
+						}
+							else{
 								%>
 									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
 								<%
@@ -310,18 +329,29 @@ li:hover {
 						}else if(noti.getFrom_co().equals(request.getAttribute("user"))){
 							if(noti.getFlag() == 0){
 								%>
-									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><input class="noti-btn" type="button" value="취소"></td></tr>
+									<form  action="./updateaction">
+									<input type="hidden" name="flagUpdate2" value="<%=noti.getIdx()%>">
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">취소</button></td></tr>
+									
+									</form>
 								<%
-							}else{
+							}else if(noti.getFlag() == 2){
+								%>
+								<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>취소됨</td><td>-</td></tr>
+							
+							<%
+						}
+							else{
 								%>
 									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
+								
 								<%
 							}
 						}
 					}
 					
 					%>
-<!-- 						<tr class="supple-tr"><td>2019-10-21 11:10</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr>
+<!-- 						<tr class="supple-tr"><td>2019-10-21 11:10</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr></td><td><input class="noti-btn" type="button" value="취소">
 						<tr class="supple-tr"><td>2019-10-21 11:27</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
 						<tr class="supple-tr"><td>2019-10-21 11:28</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
 						<tr class="supple-tr"><td>2019-10-21 11:29</td><td>AAAA01</td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="취소"></td></tr>

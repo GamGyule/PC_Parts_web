@@ -33,7 +33,7 @@
 	
 	
 	
-	<update id="notiflag" parameterType="java.lang.Integer">
-		update noti set flag = 1 where idx = #{idx};
+	<update id="notiflag" parameterType="map">
+		update noti set flag = flag + #{flag} where idx = #{idx};
 	</update>
 </mapper>
