@@ -196,19 +196,19 @@ public class HomeController {
 		if (!LoginCheck(req)) {
 			return "login";
 		}
-		
+
 		HttpSession session = req.getSession();
 		CompanyDTO user = (CompanyDTO) session.getAttribute("user");
 
 		List<NotiDTO> Noti_listAll = (List<NotiDTO>) notidao.selectNoti(user.getCo());
 		ArrayList<String> Noti_name = new ArrayList<String>();
 
-		/*
-		 * for(int i = 0; i < Noti_listAll.size(); i++) {
-		 * Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid())); }
-		 */
+		for (int i = 0; i < Noti_listAll.size(); i++) {
+			Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid()));
+		}
 
 		model.addAttribute("noti_listAll", Noti_listAll);
+		model.addAttribute("noti_nameList", Noti_name);
 		model.addAttribute("user", user.getCo());
 		return "noti";
 
