@@ -18,8 +18,8 @@ public class NotiDTO {
 	SimpleDateFormat local_date = new SimpleDateFormat("yyyy-MM-dd HH-mm");
 	
 	
-	public Date getDate() {
-		return date;
+	public String getDate() {
+		return local_date.format(date);
 	}
 	public void setDate(Date date) {
 		this.date = date;

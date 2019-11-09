@@ -257,11 +257,13 @@ li:hover {
 
 <body style="margin: 0; padding: 0;">
 	<%
-	int noti_cnt = 0;
 	List<NotiDTO> noti_listAll = null;
 	if (request.getAttribute("noti_listAll") != null) {
 		noti_listAll = (List<NotiDTO>) request.getAttribute("noti_listAll");
-		noti_cnt = noti_listAll.size();
+		
+		for(int i = 0; i < noti_listAll.size();i++){
+			System.out.println(noti_listAll.get(i).getDate());
+		}
 	}
 	%>
 	<div style="height: 100px;color:white; line-height: 100px; width: 100%;padding:0 10px 0 10px;box-sizing: border-box;font-size: 32px;background-color:#fdcb6e;">
@@ -272,10 +274,10 @@ li:hover {
 		<div style="float: left; height: 100%; display: inline-block;">
 			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
 				<a href="./home"><li>홈</li></a>
-				<a href="./supple"><li class="tab-select">재고 관리</li></a>
+				<a href="./supple"><li>재고 관리</li></a>
 				<a href="javascript:;"><li>입·출고 관리</li></a>
 				<a href="javascript:;"><li>통계 관리</li></a>
-				<a href="./noti"><li>재고 요청</li></a>
+				<a href="./noti"><li class="tab-select">재고 요청</li></a>
 			</ul>
 		</div>
 
@@ -290,18 +292,26 @@ li:hover {
 					</thead>
 					<tbody>
 					<%
-					System.out.println(noti_listAll.toString());
-					for(int i = 0; i <= noti_listAll.size()-1; i++) {
+					for(int i = 0; i < noti_listAll.size(); i++) {
 						NotiDTO noti = noti_listAll.get(i);
-						
 						if(noti.getTo_co().equals(request.getAttribute("user"))){
 							if(noti.getFlag() == 0){
 								%>
-									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td>21</td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td><%=noti.getCnt() %></td><td>대기중</td><td><input class="noti-btn" type="button" value="수락"></td></tr>
 								<%
 							}else{
 								%>
-									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td>21</td><td>완료</td><td>-</td></tr>
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
+								<%
+							}
+						}else if(noti.getFrom_co().equals(request.getAttribute("user"))){
+							if(noti.getFlag() == 0){
+								%>
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td><%=noti.getCnt() %></td><td>대기중</td><td><input class="noti-btn" type="button" value="취소"></td></tr>
+								<%
+							}else{
+								%>
+									<tr class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getPid() %></td><td>AAAA01의 상품 이름</td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
 								<%
 							}
 						}

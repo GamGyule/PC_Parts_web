@@ -92,12 +92,11 @@ public class HomeController {
 
 		List<NotiDTO> noti_list = (List<NotiDTO>) notidao.selectNotiMain();
 		model.addAttribute("noti_list", noti_list);
-		
+
 		int suppleLow = supdao.SuppleSelectLow();
-		model.addAttribute("suppleLow",suppleLow);
+		model.addAttribute("suppleLow", suppleLow);
 		return "home";
-		
-		
+
 	}
 
 	@RequestMapping("/loginaction")
@@ -110,8 +109,6 @@ public class HomeController {
 		model.addAttribute("list", companyDtoList);
 		return "formaction/loginAction";
 	}
-
-
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
@@ -138,7 +135,7 @@ public class HomeController {
 			model.addAttribute("SuppleCnt", SuppleCnt);
 			return "supple";
 
-		}else if (request.getParameter("searchCompany") != null && request.getParameter("searchName") == null) {
+		} else if (request.getParameter("searchCompany") != null && request.getParameter("searchName") == null) {
 
 			System.out.println("회사검색");
 			String co = request.getParameter("searchCompany");
@@ -196,21 +193,23 @@ public class HomeController {
 
 	@RequestMapping("/noti")
 	public String Noti(Model model, HttpServletRequest req) {
+		if (!LoginCheck(req)) {
+			return "login";
+		}
+		
 		HttpSession session = req.getSession();
 		CompanyDTO user = (CompanyDTO) session.getAttribute("user");
-		
+
 		List<NotiDTO> Noti_listAll = (List<NotiDTO>) notidao.selectNoti(user.getCo());
 		ArrayList<String> Noti_name = new ArrayList<String>();
-		
-		for(int i = 0; i < Noti_listAll.size(); i++) {
-			Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid()));
-		}
-		
-		for(String temp : Noti_name){
-			System.out.println(temp);
-		}
-		model.addAttribute("noti_listAll" , Noti_listAll);
-		model.addAttribute("user",user.getCo());
+
+		/*
+		 * for(int i = 0; i < Noti_listAll.size(); i++) {
+		 * Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid())); }
+		 */
+
+		model.addAttribute("noti_listAll", Noti_listAll);
+		model.addAttribute("user", user.getCo());
 		return "noti";
 
 	}
