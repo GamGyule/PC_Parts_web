@@ -127,6 +127,27 @@ public class HomeController {
 
 		return "formaction/updateaction";
 	}
+	
+	@RequestMapping("/srequest")
+	public String ReqeustSupple(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		CompanyDTO user = (CompanyDTO)session.getAttribute("user");
+		
+		
+		String page = req.getParameter("page");
+		
+		
+		String pid = req.getParameter("supplePid");
+		String cnt = req.getParameter("suppleCnt");
+		String to_co = req.getParameter("suppleComp");
+		String from_co = user.getCo();
+		
+		int result = supdao.RequestSupple(from_co, to_co, pid, cnt);
+		
+		model.addAttribute("page",page);
+		return "supple";
+		
+	}
 
 	@RequestMapping("/supple")
 	public String ProductManaging(Model model, HttpServletRequest request) {
@@ -136,7 +157,6 @@ public class HomeController {
 
 		if (request.getParameter("searchCompany") != null && request.getParameter("searchName") != null) {
 
-			System.out.println("회사검색 및 이름 검색");
 			String co = request.getParameter("searchCompany");
 			String name = request.getParameter("searchName");
 
@@ -155,7 +175,6 @@ public class HomeController {
 
 		} else if (request.getParameter("searchCompany") != null && request.getParameter("searchName") == null) {
 
-			System.out.println("회사검색");
 			String co = request.getParameter("searchCompany");
 
 			if (request.getParameter("page") != null) {
@@ -172,8 +191,6 @@ public class HomeController {
 			return "supple";
 
 		} else if (request.getParameter("searchCompany") == null && request.getParameter("searchName") != null) {
-			// 부품 이름으로 검색
-			System.out.println("이름검색");
 
 			String name = request.getParameter("searchName");
 
@@ -192,7 +209,6 @@ public class HomeController {
 			return "supple";
 		}
 
-		System.out.println("그냥 보여줌");
 		if (request.getParameter("page") != null) {
 			String page = request.getParameter("page");
 			System.out.println(page);

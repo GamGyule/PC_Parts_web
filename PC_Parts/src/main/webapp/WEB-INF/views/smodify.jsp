@@ -87,6 +87,29 @@ input {
 		opener.location.reload();
 		window.close();
 	}
+	
+	function SRequest(pid){
+		var myForm = document.SRequestForm;
+		
+		if(document.querySelector("#scnt").value == ""){
+			alert("개수를 입력해주세요>");
+			return;
+		}
+		
+		myForm.supplePid.value = pid;
+		myForm.suppleCnt.value = document.querySelector("#scnt").value;
+		
+		
+		
+		var url = "/srequest";
+		myForm.action = url;
+		myForm.method="post";
+		
+		myForm.submit();
+		window.close();
+
+	}
+	
 </script>
 </head>
 <body>
@@ -106,7 +129,7 @@ input {
 			<input type="hidden" name="suppleName">
 			<input type="hidden" name="suppleInfo">
 		</form>
-		
+
 		<%
 			if(supple.getIdx().substring(0,4).equals(user.getCo())){
 				
@@ -119,11 +142,17 @@ input {
 				<%
 			}else{
 				%>
-					<input class="idx" type="text" value="<%=supple.getIdx()%>" readonly="readonly"><input class="price" type="text" placeholder="요청 개수"><br><br>
+				
+					<input class="idx" type="text" value="<%=supple.getIdx()%>" readonly="readonly"><input class="price" id="scnt" type="text" placeholder="요청 개수"><br><br>
 					<input class="pname" type="text" readonly="readonly" value="<%=supple.getName()%>"><br><br>
 					<textarea class="pcontent" readonly="readonly"><%=supple.getInfo()%></textarea>
 					<div class="btn-area">
-					<input class="pbtn" type="button" value="요청">	<input class="pbtn" onclick="window.close()" type="button" value="닫기">
+					<input class="pbtn" onclick="SRequest('<%=supple.getPid() %>')" type="button" value="요청">	<input class="pbtn" onclick="window.close()" type="button" value="닫기">
+					<form name="SRequestForm">
+						<input type="hidden" name="supplePid">
+						<input type="hidden" name="suppleCnt">
+						<input type="hidden" name="suppleComp" value="<%=supple.getCo()%>">
+					</form>
 				<%
 			}
 		%>

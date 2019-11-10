@@ -22,5 +22,7 @@ public interface SuppleDAO {
 	public List<SuppleDTO> selectSuppleCoName(String co ,String name , String page);
 	public int SuppleSelectLow();
 	
+	public int RequestSupple(String from_co, String to_co, String pid, String cnt);
+	
 	
 }

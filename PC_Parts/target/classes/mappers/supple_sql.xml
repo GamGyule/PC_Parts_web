@@ -49,7 +49,9 @@
     </select>
     
      
-    
+    <select id="SuppleRequest" resultType="java.lang.Integer" parameterType="map">
+        <![CDATA[ insert into noti(from_co, to_co, pid, cnt, flag, date) values(#{from_co}, #{to_co}, #{pid}, #{cnt}, 0, now())]]>
+    </select>
     
 
     <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">

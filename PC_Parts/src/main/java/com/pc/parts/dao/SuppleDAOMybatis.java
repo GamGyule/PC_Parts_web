@@ -111,6 +111,18 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Supple.SuppleSelectLow");
 	}
+	@Override
+	public int RequestSupple(String from_co, String to_co, String pid, String cnt) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("from_co", from_co);
+		map.put("to_co", to_co);
+		map.put("pid", pid);
+		map.put("cnt", cnt);
+		
+		
+		return sqlSession.insert("Supple.SuppleRequest",map);
+	}
 
 
 	
