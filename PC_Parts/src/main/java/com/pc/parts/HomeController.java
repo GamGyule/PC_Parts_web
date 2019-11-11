@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiCmtDAOMyBatis;
@@ -55,7 +56,6 @@ public class HomeController {
 	@RequestMapping("/sdelete")
 	public void Sdelete(HttpServletRequest request) {
 		String idx = request.getParameter("suppleIdx");
-		System.out.println("Delete > " + idx);
 		supdao.SuppleDelete(idx);
 	}
 
@@ -72,8 +72,6 @@ public class HomeController {
 		int i_count = Integer.parseInt(count);
 
 		SuppleDTO supple = new SuppleDTO(idx, 0, "update", name, info, i_price, i_count);
-		System.out.println("Update > " + supple.getIdx());
-		System.out.println(supple.getIdx());
 		supdao.SuppleUpdate(supple);
 	}
 
@@ -109,7 +107,6 @@ public class HomeController {
 	public String LoginAction(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		System.out.println(id + pw);
 		List<CompanyDTO> companyDtoList = (List<CompanyDTO>) comdao.LoginCompany(id, pw);
 
 		model.addAttribute("list", companyDtoList);
@@ -122,11 +119,9 @@ public class HomeController {
 		String flagUpdate2 = request.getParameter("flagUpdate2");
 		if(flagUpdate != null) {
 			int idx = Integer.parseInt(flagUpdate);
-			System.out.println("update > " + idx);
 			notidao.NotiFlag(idx , 1);
 		}else {
 			int idx = Integer.parseInt(flagUpdate2);
-			System.out.println("update > " + idx);
 			notidao.NotiFlag(idx , 2);
 		}
 		
@@ -137,17 +132,22 @@ public class HomeController {
 	@RequestMapping("/srequest")
 	public String ReqeustSupple(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
+		
 		CompanyDTO user = (CompanyDTO)session.getAttribute("user");
 		
 		String page = req.getParameter("page");
 		
-		
+		String cmt_content = req.getParameter("cmt_content");
 		String pid = req.getParameter("supplePid");
 		String cnt = req.getParameter("suppleCnt");
 		String to_co = req.getParameter("suppleComp");
 		String from_co = user.getCo();
 		
-		int result = supdao.RequestSupple(from_co, to_co, pid, cnt);
+		supdao.RequestSupple(from_co, to_co, pid, cnt);
+		if(cmt_content != "") {
+			String noti_lastAI = notidao.getLastAI();
+			notiCmtDao.sendReply(noti_lastAI, user.getCo(), cmt_content);
+		}
 		
 		model.addAttribute("page",page);
 		return "supple";
@@ -200,7 +200,6 @@ public class HomeController {
 
 			if (request.getParameter("page") != null) {
 				String page = request.getParameter("page");
-				System.out.println(page);
 				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name, page);
 				model.addAttribute("list", Supple_list);
 			} else {
@@ -215,7 +214,6 @@ public class HomeController {
 
 		if (request.getParameter("page") != null) {
 			String page = request.getParameter("page");
-			System.out.println(page);
 			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSupple(page);
 			model.addAttribute("list", Supple_list);
 		} else {
@@ -248,10 +246,6 @@ public class HomeController {
 			cmtList.add(notiCmtDao.cmtCount(Noti_listAll.get(i).getIdx()));
 		}
 		
-		for(int a : cmtList) {
-			System.out.println(a);
-		}
-		
 		model.addAttribute("noti_listAll", Noti_listAll);
 		model.addAttribute("noti_nameList", Noti_name);
 		model.addAttribute("user", user.getCo());
@@ -266,10 +260,8 @@ public class HomeController {
 		}
 		
 		String idx = req.getParameter("supIdx");
-		System.out.println("asdasd" + idx);
 		
 		NotiDTO noti = notidao.selectIdxNoti(idx);
-		System.out.println("asdasd"+noti.getPid());
 		List<NotiCmtDTO> cmtList = (List<NotiCmtDTO>)notiCmtDao.getSupCmtList(idx);
 		String name = notidao.selectname(noti.getPid());
 		
@@ -280,6 +272,7 @@ public class HomeController {
 		return "supRequest";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/sendReply")
 	public void SendReplay(HttpServletRequest req) {
 		String notiIdx = req.getParameter("notiIdx");

@@ -35,7 +35,9 @@
 		select * from noti where idx = #{idx}
 	</select>
 	
-	
+	<select id="getLastAI" resultType="java.lang.String">
+		SELECT AUTO_INCREMENT-1 FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'compuzone' AND TABLE_NAME = 'noti'
+	</select>
 	
 	<update id="notiflag" parameterType="map">
 		update noti set flag = flag + #{flag} where idx = #{idx};

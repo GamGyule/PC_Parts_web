@@ -12,4 +12,5 @@ public interface NotiDAO {
 	public List<NotiDTO>  selectNotiMain();
 	public void NotiFlag(int idx , int flag);
 	public NotiDTO selectIdxNoti(String idx);
+	public String getLastAI();
 }

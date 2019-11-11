@@ -8,13 +8,14 @@
 <meta charset="UTF-8">
 <title>재고 관리</title>
 <style>
-html, body{
-	margin:0px;
-	padding:0px;
+html, body {
+	margin: 0px;
+	padding: 0px;
 }
+
 input {
 	padding: 5px;
-	margin:0px;
+	margin: 0px;
 	display: inline;
 	vertical-align: bottom;
 	box-shadow: none;
@@ -22,24 +23,33 @@ input {
 
 .idx {
 	width: calc(33% - 15px);
-	background-color:#D8D8D8;
+	background-color: #D8D8D8;
 	height: 25px;
 }
-.noti-name{
+
+.noti-name {
 	width: 254px;
-	height:25px;
+	height: 25px;
 }
+
 .pname {
 	width: calc(100% - 15px);
 	height: 25px;
 }
 
 .pcontent {
-	min-width:calc(100% - 7px);
-	max-width:calc(100% - 7px);
+	min-width: calc(100% - 7px);
+	max-width: calc(100% - 7px);
 	width: calc(100% - 7px);
-	height:150px;
+	height: 150px;
 	font-size: 18px;
+}
+
+.cmt-content {
+	min-width: calc(100% - 7px);
+	max-width: calc(100% - 7px);
+	width: calc(100% - 7px);
+	height: 80px;
 }
 
 .price {
@@ -47,54 +57,64 @@ input {
 	height: 25px;
 	text-align: right;
 }
-.input-area{
-	padding:10px;
-	width:400px;
+
+.input-area {
+	padding: 10px;
+	width: 400px;
 }
 
-.btn-area{
+.btn-area {
 	text-align: center;
 }
-.pbtn{
-	width:100px;
-	height:40px;
+
+.pbtn {
+	width: 100px;
+	height: 40px;
 }
 
-.from-co{
-width:calc(50% - 50px);
-height:25px;
+.from-co {
+	width: calc(50% - 50px);
+	height: 25px;
 }
 
-.to-co{
-width:calc(50% - 50px);
-height:25px;
+.to-co {
+	width: calc(50% - 50px);
+	height: 25px;
 }
 
-.cmt-mine{
+.cmt-mine {
 	text-align: right;
 	display: block;
 }
 
-.cmt-other{
+.cmt-other {
 	text-align: left;
 	display: block;
 }
 
-.text-box{
-	background-color: RGBA(255,255,255,1);
-	min-width:100px;
-	max-width:200px;
+.text-box {
+	background-color: RGBA(255, 255, 255, 1);
+	min-width: 100px;
+	max-width: 200px;
 	display: inline-block;
 	border-radius: 3px;
-	padding:7px;
+	padding: 7px;
 }
 
-.cmt-submit{
-	width:100px;
+.cmt-submit {
+	width: 100px;
 }
 
-.cmt-content{
-	width:250px;
+.cmt-content {
+	width: 250px;
+}
+
+#textArea {
+	padding: 15px;
+	border: 1px solid black;
+	background-color: RGBA(0, 0, 0, 0.1);
+	height: 300px;
+	overflow-y: auto;
 }
 </style>
 <script>
@@ -119,7 +139,7 @@ height:25px;
 			<form name="SRequestForm">
 				<input type="hidden" name="notiIdx" value="<%=notiDto.getIdx()%>">
 				<input type="hidden" name="myComp" value="<%=user.getCo()%>">
-				<div id="textArea" style="width:100%; border:1px solid black; background-color:RGBA(0,0,0,0.1); height:300px;overflow-y:auto;">
+				<div id="textArea">
 				
 				<%
 					for(NotiCmtDTO cmt : notiCmtList){
@@ -135,7 +155,7 @@ height:25px;
 					}
 				%>
 				</div>
-				<input type="text" name="notiCmtContent" placeholder="내용" class="cmt-content">
+				<textarea class="cmt-content" name="notiCmtContent"></textarea>
 				<input type="button" onclick="SendReply()" class="cmt-submit" value="등록하기">
 			</form>
 		<script>
@@ -144,19 +164,28 @@ height:25px;
 		
 			function SendReply(){
 				var myForm = document.SRequestForm;
-				var content = myForm.notiCmtContent.value;
 				
-				if(content == ""){
+				var notiCmtContent = myForm.notiCmtContent.value;
+				var myComp = myForm.myComp.value;
+				var notiIdx = myForm.notiIdx.value;
+				
+				if(notiCmtContent == ""){
 					alert("댓글을 입력해주세요!");
 					return;
 				}
-				var url = "/sendReply";
-				myForm.action = url;
-				myForm.method = "post";
-				myForm.submit();
 				
-				location.reload();
+				var url = "/sendReply?notiIdx="+notiIdx+"&myComp="+myComp+"&notiCmtContent="+notiCmtContent;
 				
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+				  if (xhr.readyState === xhr.DONE) {
+				    if (xhr.status === 200 || xhr.status === 201) {
+				      location.reload();
+				    }
+				  }
+				};
+				xhr.open('POST', url);
+				xhr.send();
 			}
 		</script>
 		<input class="pbtn" onclick="window.close()" type="button" value="닫기">

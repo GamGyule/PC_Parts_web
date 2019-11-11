@@ -268,7 +268,7 @@ li:hover {
 		var url = "/supRequestPage";
 		myForm.action = url;
 		myForm.method="post";
-		window.open("","popForm","width=420,height=600,left=700,top=150,resizable=no,menubar=no");
+		window.open("","popForm","width=420,height=620,left=700,top=150,resizable=no,menubar=no");
 		myForm.target = "popForm";
 		myForm.submit();
 	}

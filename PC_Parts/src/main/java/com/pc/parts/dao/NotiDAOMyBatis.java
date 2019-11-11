@@ -51,6 +51,11 @@ public class NotiDAOMyBatis implements NotiDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Notice.selectIdxNoti",idx);
 	}
+	@Override
+	public String getLastAI() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Notice.getLastAI");
+	}
 	
 	
 

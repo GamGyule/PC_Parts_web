@@ -56,6 +56,13 @@ input {
 	width:100px;
 	height:40px;
 }
+
+.cmt-content{
+	min-width: calc(100% - 7px);
+    max-width: calc(100% - 7px);
+    width: calc(100% - 7px);
+    height: 80px;
+}
 </style>
 <script>
 	function SDelete(idx){
@@ -123,7 +130,6 @@ input {
 	<div class="input-area">
 		<form name="SDeleteForm">
 			<input type="hidden" name="suppleIdx">
-			
 			<input type="hidden" name="supplePrice">
 			<input type="hidden" name="suppleCount">
 			<input type="hidden" name="suppleName">
@@ -147,12 +153,14 @@ input {
 					<input class="pname" type="text" readonly="readonly" value="<%=supple.getName()%>"><br><br>
 					<textarea class="pcontent" readonly="readonly"><%=supple.getInfo()%></textarea>
 					<div class="btn-area">
-					<input class="pbtn" onclick="SRequest('<%=supple.getPid() %>')" type="button" value="요청">	<input class="pbtn" onclick="window.close()" type="button" value="닫기">
 					<form name="SRequestForm">
 						<input type="hidden" name="supplePid">
 						<input type="hidden" name="suppleCnt">
 						<input type="hidden" name="suppleComp" value="<%=supple.getCo()%>">
+						<textarea class="cmt-content" placeholder="요청시 할 말" name="cmt_content"></textarea>
 					</form>
+					<input class="pbtn" onclick="SRequest('<%=supple.getPid() %>')" type="button" value="요청">	<input class="pbtn" onclick="window.close()" type="button" value="닫기">
+					
 				<%
 			}
 		%>

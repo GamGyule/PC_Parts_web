@@ -246,7 +246,7 @@ li:hover {
 	function smodifySubmit(idx){
 		var myForm = document.popForm;
 		var url = "/smodify";
-		window.open("","popForm","width=420,height=340,left=700,top=150,resizable=no,menubar=no");
+		window.open("","popForm","width=420,height=430,left=700,top=150,resizable=no,menubar=no");
 		myForm.action = url;
 		myForm.method = "post";
 		myForm.target = "popForm";
