@@ -15,7 +15,7 @@
     </select>
     
 	<select id="SuppleSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
-        <![CDATA[ select * from product limit #{page}, 15]]>
+        <![CDATA[ select * from product limit #{page}, 20]]>
     </select>
     
     
@@ -25,7 +25,7 @@
     </select>
     
     <select id="SuppleSelectName" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
-        <![CDATA[ select * from product where name like '%${name}%' limit #{page}, 15 ]]>
+        <![CDATA[ select * from product where name like '%${name}%' limit #{page}, 20 ]]>
     </select>
     
     
@@ -35,11 +35,23 @@
     </select>
     
     <select id="SuppleSelectCo" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
-        <![CDATA[ select * from product where co like '%${co}%' limit #{page}, 15]]>
+        <![CDATA[ select * from product where co like '%${co}%' limit #{page}, 20]]>
+    </select>
+    
+    
+    
+    <select id="CoNameSuppleCnt" resultType="java.lang.Integer" parameterType="map">
+        select count(*) from product where co like '%${co}%' and name like '%${name}%'
+    </select>
+    
+    <select id="SuppleSelectCoName" resultType="com.pc.parts.dto.SuppleDTO" parameterType="map">
+        <![CDATA[ select * from product where co like '%${co}%' and name like '%${name}%' limit #{page}, 20]]>
     </select>
     
      
-    
+    <select id="SuppleRequest" resultType="java.lang.Integer" parameterType="map">
+        <![CDATA[ insert into noti(from_co, to_co, pid, cnt, flag, date) values(#{from_co}, #{to_co}, #{pid}, #{cnt}, 0, now())]]>
+    </select>
     
 
     <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
@@ -52,6 +64,10 @@
     
     <select id="SuppleUpdate" parameterType="map">
     	<![CDATA[ update product set name = #{name},info = #{info},price = #{price},count=#{count} where idx = #{idx}]]>
+    </select>
+    
+    <select id="SuppleSelectLow" resultType="java.lang.Integer">
+        <![CDATA[ select count(*) from product where count <= 5]]>
     </select>
 
 </mapper>

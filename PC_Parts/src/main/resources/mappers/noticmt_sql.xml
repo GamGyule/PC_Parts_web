@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notiCmt">
+
+
+	<select id="CmtList" resultType="com.pc.parts.dto.NotiCmtDTO" parameterType="java.lang.String" >
+		select * from noti_cmt where noti_idx = #{idx};
+	</select>
+	
+	<select id="SendReply" parameterType="map">
+		insert into noti_cmt(noti_idx, cmt_comp, cmt_content, date) values(#{notiIdx},#{cmt_comp},#{cmt_content},now());
+	</select>
+	
+	
+	<select id="notiCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from noti_cmt where noti_idx = #{idx}
+	</select>
+
+</mapper>

@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pc.parts.dao.CompanyDAOMyBatis;
+import com.pc.parts.dao.NotiCmtDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
 import com.pc.parts.dao.SuppleDAOMybatis;
 import com.pc.parts.dto.CompanyDTO;
+import com.pc.parts.dto.NotiCmtDTO;
 import com.pc.parts.dto.NotiDTO;
 import com.pc.parts.dto.SuppleDTO;
 
@@ -32,6 +34,10 @@ public class HomeController {
 
 	@Inject
 	SuppleDAOMybatis supdao;
+	
+	@Inject
+	NotiCmtDAOMyBatis notiCmtDao;
+
 
 	public boolean LoginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -133,7 +139,6 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		CompanyDTO user = (CompanyDTO)session.getAttribute("user");
 		
-		
 		String page = req.getParameter("page");
 		
 		
@@ -146,7 +151,6 @@ public class HomeController {
 		
 		model.addAttribute("page",page);
 		return "supple";
-		
 	}
 
 	@RequestMapping("/supple")
@@ -225,6 +229,7 @@ public class HomeController {
 
 	}
 
+
 	@RequestMapping("/noti")
 	public String Noti(Model model, HttpServletRequest req) {
 		if (!LoginCheck(req)) {
@@ -236,15 +241,51 @@ public class HomeController {
 
 		List<NotiDTO> Noti_listAll = (List<NotiDTO>) notidao.selectNoti(user.getCo());
 		ArrayList<String> Noti_name = new ArrayList<String>();
+		ArrayList<Integer> cmtList = new ArrayList<Integer>();
 
 		for (int i = 0; i < Noti_listAll.size(); i++) {
 			Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid()));
+			cmtList.add(notiCmtDao.cmtCount(Noti_listAll.get(i).getIdx()));
 		}
-
+		
+		for(int a : cmtList) {
+			System.out.println(a);
+		}
+		
 		model.addAttribute("noti_listAll", Noti_listAll);
 		model.addAttribute("noti_nameList", Noti_name);
 		model.addAttribute("user", user.getCo());
+		model.addAttribute("notiCmtCount",cmtList);
 		return "noti";
-
+	}
+	
+	@RequestMapping("/supRequestPage")
+	public String SupRequestPage(Model model, HttpServletRequest req) {
+		if (!LoginCheck(req)) {
+			return "login";
+		}
+		
+		String idx = req.getParameter("supIdx");
+		System.out.println("asdasd" + idx);
+		
+		NotiDTO noti = notidao.selectIdxNoti(idx);
+		System.out.println("asdasd"+noti.getPid());
+		List<NotiCmtDTO> cmtList = (List<NotiCmtDTO>)notiCmtDao.getSupCmtList(idx);
+		String name = notidao.selectname(noti.getPid());
+		
+		model.addAttribute("notiInfo",noti);
+		model.addAttribute("notiCmtList",cmtList);
+		model.addAttribute("notiName",name);
+		
+		return "supRequest";
+	}
+	
+	@RequestMapping("/sendReply")
+	public void SendReplay(HttpServletRequest req) {
+		String notiIdx = req.getParameter("notiIdx");
+		String myComp = req.getParameter("myComp");
+		String content = req.getParameter("notiCmtContent");
+		
+		notiCmtDao.sendReply(notiIdx, myComp, content);
 	}
 }

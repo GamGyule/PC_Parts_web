@@ -31,6 +31,10 @@
 		select * from noti where flag = 0;
 	</select>
 	
+	<select id="selectIdxNoti" resultType="com.pc.parts.dto.NotiDTO">
+		select * from noti where idx = #{idx}
+	</select>
+	
 	
 	
 	<update id="notiflag" parameterType="map">
