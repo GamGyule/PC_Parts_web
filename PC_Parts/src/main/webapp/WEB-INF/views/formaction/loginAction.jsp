@@ -4,9 +4,18 @@
 <%
 	if(request.getAttribute("list") != null){
 		List<CompanyDTO> list = (List<CompanyDTO>)request.getAttribute("list");
-		CompanyDTO dto = list.get(0);
-		session.setAttribute("user", dto);
-		response.sendRedirect("../home");
+		if(list.isEmpty()){
+			%>
+				<script>
+					alert("아이디 또는 비밀번호가 다릅니다.");
+					location.href="/";
+				</script>
+			<%
+		}else{
+			CompanyDTO dto = list.get(0);
+			session.setAttribute("user", dto);
+			response.sendRedirect("../home");
+		}
 	}else{
 		response.sendRedirect("../");
 	}

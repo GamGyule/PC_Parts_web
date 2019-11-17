@@ -121,15 +121,34 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 </style>
+<script>
+	function goLogin(){
+		var myForm = document.loginForm;
+		
+		if(myForm.id.value == ""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		
+		if(myForm.pw.value == ""){
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+		
+		myForm.action="./loginaction"
+		myForm.method="post"
+		myForm.submit();
+	}
+</script>
 </head>
 <body>
 	<div class="login-page">
 		<div class="form">
-			<form class="login-form" action="./loginaction" method="post">
+			<form name="loginForm" class="login-form" onsubmit="return false">
 
 				<input name="id" type="text" placeholder="아이디" />
-				<input name ="pw" type="password" placeholder="비밀번호" />
-				<button>로그인</button>
+				<input name="pw" type="password" placeholder="비밀번호" />
+				<button onclick="goLogin()">로그인</button>
 			</form>
 		</div>
 	</div>
