@@ -87,6 +87,7 @@ public class HomeController {
 
 		SuppleDTO supple = supdao.SuppleSelectIdx(pdIdx);
 		model.addAttribute("supple", supple);
+		System.out.println("asdasdasd");
 		return "smodify";
 	}
 
@@ -131,7 +132,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/srequest")
-	public String ReqeustSupple(Model model, HttpServletRequest req, HttpServletResponse response) throws IOException {
+	public void ReqeustSupple(Model model, HttpServletRequest req, HttpServletResponse response) throws IOException {
 		HttpSession session = req.getSession();
 
 		CompanyDTO user = (CompanyDTO) session.getAttribute("user");
@@ -149,9 +150,9 @@ public class HomeController {
 		if (result < 1) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('요청하는 재고가 너무 많습니다.');history.go(-1);</script>");
+			out.println("<script>alert('요청하는 재고가 너무 많습니다.');history.back();</script>");
 			out.flush();
-			return null;
+			return;
 		} else {
 			
 			supdao.RequestSupple(from_co, to_co, pid, cnt);
@@ -161,7 +162,12 @@ public class HomeController {
 			}
 
 			model.addAttribute("page", page);
-			return "/Supple";
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('요청하였습니다.');window.close();</script>");
+			out.flush();
+			return;
 		}
 	}
 
