@@ -145,16 +145,6 @@ li:hover {
 	white-space: nowrap;
 }
 
-.product_table th:nth-child(6) {
-	width: 100px;
-	min-width: 100px;
-}
-
-.product_table th:nth-child(7) {
-	width: 50px;
-	min-width: 50px;
-}
-
 .product_table th:nth-child(1) {
 	min-width: 150px;
 }
@@ -166,13 +156,23 @@ li:hover {
 .product_table th:nth-child(3) {
 	min-width: 100px;
 }
-
 .product_table th:nth-child(4) {
-	width: 450px;
-    min-width: 450px;
+	min-width: 50px;
+}
+.product_table th:nth-child(5) {
+	width: 500px;
+    min-width: 500px;
 }
 
-.product_table th:nth-child(5) {
+.product_table th:nth-child(6) {
+	min-width: 100px;
+}
+
+.product_table th:nth-child(7) {
+	min-width: 100px;
+}
+
+.product_table th:nth-child(8) {
 	min-width: 100px;
 }
 
@@ -191,6 +191,12 @@ li:hover {
 }
 
 .product_table td:nth-child(6) {
+	text-align: center;
+}
+.product_table td:nth-child(7) {
+	text-align: center;
+}
+.product_table td:nth-child(8) {
 	text-align: center;
 }
 
@@ -268,7 +274,7 @@ li:hover {
 		var url = "/supRequestPage";
 		myForm.action = url;
 		myForm.method="post";
-		window.open("","popForm","width=420,height=600,left=700,top=150,resizable=no,menubar=no");
+		window.open("","popForm","width=420,height=620,left=700,top=150,resizable=no,menubar=no");
 		myForm.target = "popForm";
 		myForm.submit();
 	}
@@ -322,7 +328,7 @@ li:hover {
 			<div style="display: inline-block;min-height: 727px;">
 				<table id="indexTable" class="product_table" style="table-layout: fixed;">
 					<thead>
-						<th onClick="SortTable(0,'T');">날짜</th><th onClick="SortTable(1,'T');">요청한 회사</th><th onclick="SortTable(2,'T');">상품 번호</th><th onclick="SortTable(3,'T');">상품 이름</th><th onclick="SortTable(4,'N');">요청 개수</th><th>처리 현황</th><th>비고</th>
+						<th onClick="SortTable(0,'T');">날짜</th><th onClick="SortTable(1,'T');">요청한 회사</th><th onClick="SortTable(2,'T');">받은 회사</th><th onclick="SortTable(3,'T');">상품 번호</th><th onclick="SortTable(4,'T');">상품 이름</th><th onclick="SortTable(5,'N');">요청 개수</th><th onclick="SortTable(6,'T');">처리 현황</th><th>비고</th>
 					</thead>
 					<tbody>
 					<%
@@ -333,18 +339,18 @@ li:hover {
 								%>
 									<form  action="./updateaction">
 										<input type="hidden" name="flagUpdate" value="<%=noti.getIdx()%>">
-										<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">수락</button></td></tr>
+										<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">수락</button></td></tr>
 									</form>
 								<%
 							}else if(noti.getFlag()==2){
 								%>
-									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>취소됨</td><td>-</td></tr>
+									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getTo_co() %></td><td></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>취소됨</td><td>-</td></tr>
 							
 							<%
 						}
 							else{
 								%>
-									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
+									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
 								<%
 							}
 						}else if(noti.getFrom_co().equals(request.getAttribute("user"))){
@@ -352,19 +358,19 @@ li:hover {
 								%>
 									<form  action="./updateaction">
 									<input type="hidden" name="flagUpdate2" value="<%=noti.getIdx()%>">
-									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">취소</button></td></tr>
+									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">취소</button></td></tr>
 									
 									</form>
 								<%
 							}else if(noti.getFlag() == 2){
 								%>
-								<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>취소됨</td><td>-</td></tr>
+								<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>취소됨</td><td>-</td></tr>
 							
 							<%
 						}
 							else{
 								%>
-									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
+									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
 								
 								<%
 							}
