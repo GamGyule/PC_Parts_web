@@ -113,8 +113,6 @@ input {
 		myForm.method="post";
 		
 		myForm.submit();
-		window.close();
-
 	}
 	
 </script>

@@ -53,6 +53,10 @@
         <![CDATA[ insert into noti(from_co, to_co, pid, cnt, flag, date) values(#{from_co}, #{to_co}, #{pid}, #{cnt}, 0, now())]]>
     </select>
     
+     <select id="CheckSuppleCnt" resultType="java.lang.Integer" parameterType="map">
+        <![CDATA[ select count(*) from product where co = #{to_co} and pid = #{pid} and count >= #{cnt} ]]>
+    </select>
+    
 
     <select id="SuppleSelectIdx" resultType="com.pc.parts.dto.SuppleDTO">
         select * from product where #{idx} = idx;

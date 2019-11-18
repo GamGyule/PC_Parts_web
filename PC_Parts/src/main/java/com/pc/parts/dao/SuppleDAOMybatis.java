@@ -123,6 +123,15 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		
 		return sqlSession.insert("Supple.SuppleRequest",map);
 	}
+	@Override
+	public int checkSuppleCnt(String to_co, String pid, String cnt) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("to_co", to_co);
+		map.put("pid", pid);
+		map.put("cnt", cnt);
+		return sqlSession.selectOne("Supple.CheckSuppleCnt",map);
+	}
 
 
 	
