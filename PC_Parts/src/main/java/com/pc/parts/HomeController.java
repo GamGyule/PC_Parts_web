@@ -1,10 +1,13 @@
 package com.pc.parts;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -35,10 +38,9 @@ public class HomeController {
 
 	@Inject
 	SuppleDAOMybatis supdao;
-	
+
 	@Inject
 	NotiCmtDAOMyBatis notiCmtDao;
-
 
 	public boolean LoginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -112,45 +114,55 @@ public class HomeController {
 		model.addAttribute("list", companyDtoList);
 		return "formaction/loginAction";
 	}
-	
+
 	@RequestMapping("/updateaction")
 	public String flagUpdate(Model model, HttpServletRequest request) {
 		String flagUpdate = request.getParameter("flagUpdate");
 		String flagUpdate2 = request.getParameter("flagUpdate2");
-		if(flagUpdate != null) {
+		if (flagUpdate != null) {
 			int idx = Integer.parseInt(flagUpdate);
-			notidao.NotiFlag(idx , 1);
-		}else {
+			notidao.NotiFlag(idx, 1);
+		} else {
 			int idx = Integer.parseInt(flagUpdate2);
-			notidao.NotiFlag(idx , 2);
+			notidao.NotiFlag(idx, 2);
 		}
-		
 
 		return "formaction/updateaction";
 	}
-	
+
 	@RequestMapping("/srequest")
-	public String ReqeustSupple(Model model, HttpServletRequest req) {
+	public String ReqeustSupple(Model model, HttpServletRequest req, HttpServletResponse response) throws IOException {
 		HttpSession session = req.getSession();
-		
-		CompanyDTO user = (CompanyDTO)session.getAttribute("user");
-		
+
+		CompanyDTO user = (CompanyDTO) session.getAttribute("user");
+
 		String page = req.getParameter("page");
-		
+
 		String cmt_content = req.getParameter("cmt_content");
 		String pid = req.getParameter("supplePid");
 		String cnt = req.getParameter("suppleCnt");
 		String to_co = req.getParameter("suppleComp");
 		String from_co = user.getCo();
-		
-		supdao.RequestSupple(from_co, to_co, pid, cnt);
-		if(cmt_content != "") {
-			String noti_lastAI = notidao.getLastAI();
-			notiCmtDao.sendReply(noti_lastAI, user.getCo(), cmt_content);
+
+		int result = supdao.checkSuppleCnt(to_co, pid, cnt);
+
+		if (result < 1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('요청하는 재고가 너무 많습니다.');history.go(-1);</script>");
+			out.flush();
+			return null;
+		} else {
+			
+			supdao.RequestSupple(from_co, to_co, pid, cnt);
+			if (cmt_content != "") {
+				String noti_lastAI = notidao.getLastAI();
+				notiCmtDao.sendReply(noti_lastAI, user.getCo(), cmt_content);
+			}
+
+			model.addAttribute("page", page);
+			return "/Supple";
 		}
-		
-		model.addAttribute("page",page);
-		return "supple";
 	}
 
 	@RequestMapping("/supple")
@@ -227,7 +239,6 @@ public class HomeController {
 
 	}
 
-
 	@RequestMapping("/noti")
 	public String Noti(Model model, HttpServletRequest req) {
 		if (!LoginCheck(req)) {
@@ -245,40 +256,40 @@ public class HomeController {
 			Noti_name.add(notidao.selectname(Noti_listAll.get(i).getPid()));
 			cmtList.add(notiCmtDao.cmtCount(Noti_listAll.get(i).getIdx()));
 		}
-		
+
 		model.addAttribute("noti_listAll", Noti_listAll);
 		model.addAttribute("noti_nameList", Noti_name);
 		model.addAttribute("user", user.getCo());
-		model.addAttribute("notiCmtCount",cmtList);
+		model.addAttribute("notiCmtCount", cmtList);
 		return "noti";
 	}
-	
+
 	@RequestMapping("/supRequestPage")
 	public String SupRequestPage(Model model, HttpServletRequest req) {
 		if (!LoginCheck(req)) {
 			return "login";
 		}
-		
+
 		String idx = req.getParameter("supIdx");
-		
+
 		NotiDTO noti = notidao.selectIdxNoti(idx);
-		List<NotiCmtDTO> cmtList = (List<NotiCmtDTO>)notiCmtDao.getSupCmtList(idx);
+		List<NotiCmtDTO> cmtList = (List<NotiCmtDTO>) notiCmtDao.getSupCmtList(idx);
 		String name = notidao.selectname(noti.getPid());
-		
-		model.addAttribute("notiInfo",noti);
-		model.addAttribute("notiCmtList",cmtList);
-		model.addAttribute("notiName",name);
-		
+
+		model.addAttribute("notiInfo", noti);
+		model.addAttribute("notiCmtList", cmtList);
+		model.addAttribute("notiName", name);
+
 		return "supRequest";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/sendReply")
 	public void SendReplay(HttpServletRequest req) {
 		String notiIdx = req.getParameter("notiIdx");
 		String myComp = req.getParameter("myComp");
 		String content = req.getParameter("notiCmtContent");
-		
+
 		notiCmtDao.sendReply(notiIdx, myComp, content);
 	}
 }

@@ -23,6 +23,7 @@ public interface SuppleDAO {
 	public int SuppleSelectLow();
 	
 	public int RequestSupple(String from_co, String to_co, String pid, String cnt);
+	public int checkSuppleCnt(String to_co, String pid, String cnt);
 	
 	
 }
