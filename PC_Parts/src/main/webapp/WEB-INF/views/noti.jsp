@@ -354,7 +354,7 @@ li:hover {
 						}
 							else{
 								%>
-									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
+									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
 								<%
 							}
 						}else if(noti.getFrom_co().equals(request.getAttribute("user"))){
@@ -374,7 +374,7 @@ li:hover {
 						}
 							else{
 								%>
-									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
+									<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr"><td><%=noti.getDate() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>완료</td><td>-</td></tr>
 								
 								<%
 							}
