@@ -126,6 +126,7 @@ public class HomeController {
 		String noti_to_co = request.getParameter("noti_to_co");
 		String noti_from_co = request.getParameter("noti_from_co");
 		
+		
 		if(flagUpdate != null) {
 			int idx = Integer.parseInt(flagUpdate);
 			notidao.NotiFlag(idx , 1);

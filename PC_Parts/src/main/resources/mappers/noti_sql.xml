@@ -43,7 +43,7 @@
 		update noti set flag = flag + #{flag} where idx = #{idx};
 	</update>
 	
-	<update id = "notiSuppleUpdateTo" parameterType="map">
+	<update id ="notiSuppleUpdateTo" parameterType="map">
 		update product set count = count + #{cnt} where pid = #{pid} and co = #{to_co}
 	</update>
 	

@@ -67,10 +67,11 @@ public class NotiDAOMyBatis implements NotiDAO {
 	public void NotiSuppleUpdateTo(int cnt, int pid, String to_co) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
 		map.put("cnt", cnt);
-		map.put("pud", pid);
+		map.put("pid", pid);
 		map.put("to_co", to_co);
+		System.out.println(map.toString());
 		sqlSession.update("Notice.notiSuppleUpdateTo", map);
 
 	}
@@ -79,10 +80,11 @@ public class NotiDAOMyBatis implements NotiDAO {
 	public void NotiSuppleUpdateFrom(int cnt, int pid, String from_co) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
 		map.put("cnt", cnt);
-		map.put("pud", pid);
-		map.put("to_co", from_co);
+		map.put("pid", pid);
+		map.put("from_co", from_co);
+		System.out.println(map.toString());
 		sqlSession.update("Notice.notiSuppleUpdateTo", map);
 	}
 
