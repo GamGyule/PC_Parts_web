@@ -87,7 +87,6 @@ public class HomeController {
 
 		SuppleDTO supple = supdao.SuppleSelectIdx(pdIdx);
 		model.addAttribute("supple", supple);
-		System.out.println("asdasdasd");
 		return "smodify";
 	}
 
