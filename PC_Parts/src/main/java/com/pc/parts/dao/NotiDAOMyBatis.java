@@ -13,50 +13,77 @@ import com.pc.parts.dto.SuppleDTO;
 
 @Repository
 public class NotiDAOMyBatis implements NotiDAO {
-	
-    @Autowired
-    private SqlSession sqlSession;
-    
+
+	@Autowired
+	private SqlSession sqlSession;
+
 	@Override
 	public void NotiInsert(NotiDTO noti) {
 		// TODO Auto-generated method stub
-		sqlSession.insert("Notice.notiInsert" ,noti);
+		sqlSession.insert("Notice.notiInsert", noti);
 	}
+
 	@Override
 	public List<NotiDTO> selectNoti(String co) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Notice.notiSelectAll",co);
+		return sqlSession.selectList("Notice.notiSelectAll", co);
 	}
+
 	@Override
 	public String selectname(int pid) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Notice.notiSelectName",pid);
+		return sqlSession.selectOne("Notice.notiSelectName", pid);
 	}
+
 	@Override
 	public List<NotiDTO> selectNotiMain() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Notice.notiCountMain");
 	}
+
 	@Override
-	public void NotiFlag(int idx , int flag) {
+	public void NotiFlag(int idx, int flag) {
 		// TODO Auto-generated method stub
-		Map<String,Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("idx", idx);
 		map.put("flag", flag);
-		sqlSession.update("Notice.notiflag",map);
+		sqlSession.update("Notice.notiflag", map);
 	}
+
 	@Override
 	public NotiDTO selectIdxNoti(String idx) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Notice.selectIdxNoti",idx);
+		return sqlSession.selectOne("Notice.selectIdxNoti", idx);
 	}
+
 	@Override
 	public String getLastAI() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Notice.getLastAI");
 	}
-	
-	
+
+	@Override
+	public void NotiSuppleUpdateTo(int cnt, int pid, String to_co) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("cnt", cnt);
+		map.put("pud", pid);
+		map.put("to_co", to_co);
+		sqlSession.update("Notice.notiSuppleUpdateTo", map);
+
+	}
+
+	@Override
+	public void NotiSuppleUpdateFrom(int cnt, int pid, String from_co) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("cnt", cnt);
+		map.put("pud", pid);
+		map.put("to_co", from_co);
+		sqlSession.update("Notice.notiSuppleUpdateTo", map);
+	}
 
 }

@@ -13,4 +13,6 @@ public interface NotiDAO {
 	public void NotiFlag(int idx , int flag);
 	public NotiDTO selectIdxNoti(String idx);
 	public String getLastAI();
+	public void NotiSuppleUpdateTo(int cnt , int pid , String to_co);
+	public void NotiSuppleUpdateFrom(int cnt , int pid , String from_co);
 }
