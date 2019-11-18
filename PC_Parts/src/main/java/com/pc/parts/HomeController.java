@@ -120,13 +120,27 @@ public class HomeController {
 	public String flagUpdate(Model model, HttpServletRequest request) {
 		String flagUpdate = request.getParameter("flagUpdate");
 		String flagUpdate2 = request.getParameter("flagUpdate2");
-		if (flagUpdate != null) {
+
+		
+		int noti_cnt = Integer.parseInt(request.getParameter("noti_cnt"));
+		int noti_pid = Integer.parseInt(request.getParameter("noti_pid"));
+		String noti_to_co = request.getParameter("noti_to_co");
+		String noti_from_co = request.getParameter("noti_from_co");
+		
+		if(flagUpdate != null) {
 			int idx = Integer.parseInt(flagUpdate);
-			notidao.NotiFlag(idx, 1);
-		} else {
+			notidao.NotiFlag(idx , 1);
+			
+			
+		}else {
+
+
 			int idx = Integer.parseInt(flagUpdate2);
 			notidao.NotiFlag(idx, 2);
 		}
+
+		notidao.NotiSuppleUpdateTo(noti_cnt , noti_pid , noti_to_co);
+		notidao.NotiSuppleUpdateFrom(noti_cnt , noti_pid , noti_from_co);
 
 		return "formaction/updateaction";
 	}

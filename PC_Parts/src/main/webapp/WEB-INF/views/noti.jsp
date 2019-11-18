@@ -187,7 +187,7 @@ li:hover {
 }
 
 .product_table td:nth-child(5) {
-	text-align: right;
+	text-align: left;
 }
 
 .product_table td:nth-child(6) {
@@ -339,6 +339,10 @@ li:hover {
 								%>
 									<form  action="./updateaction">
 										<input type="hidden" name="flagUpdate" value="<%=noti.getIdx()%>">
+										<input type="hidden" name="noti_cnt" value="<%=noti.getCnt()%>">
+										<input type="hidden" name="noti_pid" value="<%=noti.getPid()%>">
+										<input type="hidden" name="noti_to_co" value="<%=noti.getTo_co()%>">
+										<input type="hidden" name="noti_from_co" value="<%=noti.getFrom_co()%>">
 										<tr onclick="SupRequestPage('<%=noti.getIdx()%>')" class="supple-tr <%=((cmtList.get(i) > 0)?"isCmt":"")%>"><td><%=noti.getDate() %></td><td><%=noti.getFrom_co() %></td><td><%=noti.getTo_co() %></td><td><%=noti.getPid() %></td><td><div title="<%=Noti_name.get(i).toString()%>"><%=Noti_name.get(i).toString()%></div></td><td><%=noti.getCnt() %></td><td>대기중</td><td><button class="noti-btn" onclick="('<%=noti.getIdx()%>')">수락</button></td></tr>
 									</form>
 								<%

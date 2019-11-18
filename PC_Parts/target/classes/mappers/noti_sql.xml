@@ -42,4 +42,12 @@
 	<update id="notiflag" parameterType="map">
 		update noti set flag = flag + #{flag} where idx = #{idx};
 	</update>
+	
+	<update id = "notiSuppleUpdateTo" parameterType="map">
+		update product set count = count + #{cnt} where pid = #{pid} and co = #{to_co}
+	</update>
+	
+		<update id = "notiSuppleUpdateFrom" parameterType="map">
+		update product set count = count - #{cnt} where pid = #{pid} and co = #{from_co}
+	</update>
 </mapper>
