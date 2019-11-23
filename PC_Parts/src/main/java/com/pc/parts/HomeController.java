@@ -1,8 +1,10 @@
 package com.pc.parts;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,10 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiCmtDAOMyBatis;
@@ -120,27 +129,23 @@ public class HomeController {
 		String flagUpdate = request.getParameter("flagUpdate");
 		String flagUpdate2 = request.getParameter("flagUpdate2");
 
-		
 		int noti_cnt = Integer.parseInt(request.getParameter("noti_cnt"));
 		int noti_pid = Integer.parseInt(request.getParameter("noti_pid"));
 		String noti_to_co = request.getParameter("noti_to_co");
 		String noti_from_co = request.getParameter("noti_from_co");
-		
-		
-		if(flagUpdate != null) {
-			int idx = Integer.parseInt(flagUpdate);
-			notidao.NotiFlag(idx , 1);
-			
-			
-		}else {
 
+		if (flagUpdate != null) {
+			int idx = Integer.parseInt(flagUpdate);
+			notidao.NotiFlag(idx, 1);
+
+		} else {
 
 			int idx = Integer.parseInt(flagUpdate2);
 			notidao.NotiFlag(idx, 2);
 		}
 
-		notidao.NotiSuppleUpdateTo(noti_cnt , noti_pid , noti_to_co);
-		notidao.NotiSuppleUpdateFrom(noti_cnt , noti_pid , noti_from_co);
+		notidao.NotiSuppleUpdateTo(noti_cnt, noti_pid, noti_to_co);
+		notidao.NotiSuppleUpdateFrom(noti_cnt, noti_pid, noti_from_co);
 
 		return "formaction/updateaction";
 	}
@@ -168,7 +173,7 @@ public class HomeController {
 			out.flush();
 			return;
 		} else {
-			
+
 			supdao.RequestSupple(from_co, to_co, pid, cnt);
 			if (cmt_content != "") {
 				String noti_lastAI = notidao.getLastAI();
@@ -176,7 +181,7 @@ public class HomeController {
 			}
 
 			model.addAttribute("page", page);
-			
+
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('요청하였습니다.');window.close();</script>");
@@ -311,5 +316,39 @@ public class HomeController {
 		String content = req.getParameter("notiCmtContent");
 
 		notiCmtDao.sendReply(notiIdx, myComp, content);
+	}
+
+	@RequestMapping("/importExcel")
+	public void importExcel(HttpServletRequest req, MultipartFile files) {
+		try {
+			File convFile = new File(files.getOriginalFilename());
+			files.transferTo(convFile);
+			File file = convFile;
+			
+			
+			Workbook wb = WorkbookFactory.create(file);
+			Sheet sheet = wb.getSheetAt(0);
+			Iterator<Row> iterator = sheet.iterator();
+			
+			while(iterator.hasNext()) {
+				Row currentRow = iterator.next();
+				Iterator<Cell> cellIterator = currentRow.iterator();
+				
+				while(cellIterator.hasNext()) {
+					Cell currentCell = cellIterator.next();
+					
+					if(currentCell.getCellType() == CellType.STRING) {
+						System.out.println(currentCell.getStringCellValue());
+					}else if(currentCell.getCellType() == CellType.NUMERIC) {
+						System.out.println(currentCell.getNumericCellValue());
+					}
+				}
+				System.out.println();
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
