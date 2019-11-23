@@ -325,28 +325,38 @@ public class HomeController {
 			File convFile = new File(files.getOriginalFilename());
 			files.transferTo(convFile);
 			File file = convFile;
-			
-			
+
 			Workbook wb = WorkbookFactory.create(file);
 			Sheet sheet = wb.getSheetAt(0);
 			Iterator<Row> iterator = sheet.iterator();
-			
-			while(iterator.hasNext()) {
+			ArrayList<Object> list = new ArrayList<Object>();
+			int cnt = 0;
+			while (iterator.hasNext()) {
+
 				Row currentRow = iterator.next();
 				Iterator<Cell> cellIterator = currentRow.iterator();
-				
-				while(cellIterator.hasNext()) {
+
+				while (cellIterator.hasNext()) {
 					Cell currentCell = cellIterator.next();
-					
-					if(currentCell.getCellType() == CellType.STRING) {
+
+					if (currentCell.getCellType() == CellType.STRING) {
 						System.out.println(currentCell.getStringCellValue());
-					}else if(currentCell.getCellType() == CellType.NUMERIC) {
+						list.add(cnt, currentCell.getStringCellValue());
+					} else if (currentCell.getCellType() == CellType.NUMERIC) {
 						System.out.println(currentCell.getNumericCellValue());
+						list.add(cnt, (int) currentCell.getNumericCellValue());
+					}
+					cnt++;
+					if (cnt == 7) {
+						 System.out.println(list.subList(0, cnt));
+						 supdao.SuppleInsert(list);
+						 cnt = 0;
 					}
 				}
 				System.out.println();
+
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

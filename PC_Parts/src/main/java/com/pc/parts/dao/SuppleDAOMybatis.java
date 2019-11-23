@@ -1,5 +1,6 @@
 package com.pc.parts.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,6 +132,21 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		map.put("pid", pid);
 		map.put("cnt", cnt);
 		return sqlSession.selectOne("Supple.CheckSuppleCnt",map);
+	}
+	@Override
+	public void SuppleInsert(ArrayList<Object> list) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("idx" , list.get(0).toString());
+		map.put("pid" , list.get(1).toString());
+		map.put("co" , list.get(2).toString());
+		map.put("name" , list.get(3).toString());
+		map.put("info" , list.get(4).toString());
+		map.put("price" , list.get(5).toString());
+		map.put("count" , list.get(6).toString());
+		
+		sqlSession.insert("Supple.SuppleExcelInsert",map);
+		
 	}
 
 

@@ -1,5 +1,6 @@
 package com.pc.parts.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pc.parts.dto.SuppleDTO;
@@ -24,6 +25,8 @@ public interface SuppleDAO {
 	
 	public int RequestSupple(String from_co, String to_co, String pid, String cnt);
 	public int checkSuppleCnt(String to_co, String pid, String cnt);
+	
+	public void SuppleInsert(ArrayList<Object> list);
 	
 	
 }
