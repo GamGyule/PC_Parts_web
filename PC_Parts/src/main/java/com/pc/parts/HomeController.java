@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.Iterators;
 import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiCmtDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
@@ -329,7 +330,9 @@ public class HomeController {
 			Workbook wb = WorkbookFactory.create(file);
 			Sheet sheet = wb.getSheetAt(0);
 			Iterator<Row> iterator = sheet.iterator();
+			
 			ArrayList<Object> list = new ArrayList<Object>();
+			
 			int cnt = 0;
 			while (iterator.hasNext()) {
 
