@@ -319,7 +319,8 @@ public class HomeController {
 	}
 
 	@RequestMapping("/importExcel")
-	public void importExcel(HttpServletRequest req, MultipartFile files) {
+	public String importExcel(HttpServletRequest req, MultipartFile files) {
+		System.out.println("@@@@@@@@@@@@@@@@@Excel Import@@@@@@@@@@@@@@@@@");
 		try {
 			File convFile = new File(files.getOriginalFilename());
 			files.transferTo(convFile);
@@ -350,5 +351,6 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return "redirect:/supple";
 	}
 }

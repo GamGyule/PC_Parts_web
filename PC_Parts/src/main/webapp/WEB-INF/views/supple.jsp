@@ -381,6 +381,31 @@ li:hover {
 					<input name = "searchCompany" class="search-box-input" type="text" placeholder="회사 검색) AAAA" value="<%=searchCompany%>">
 					<input class="search-box-btn" type="submit" value="검색하기">
 				</form>
+				<form name="excelForm" enctype="multipart/form-data">
+					<p>Excel 파일 추가</p><input name="files" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="excelImport(this)"/>
+				</form>
+				
+				<script>
+					function excelImport(t){
+						var myForm = document.excelForm;
+						myForm.action = "/importExcel";
+						myForm.method = "post";
+						
+						var fileExt = t.value.substring(t.value.lastIndexOf('.')+1,t.value.length);
+						
+						fileExt = fileExt.toLowerCase();
+						
+						if(fileExt == "xls" || fileExt == "xlsx"){
+							myForm.submit();
+							return true;
+						}else if(fileExt == ""){
+							return false;
+						}else{
+							alert("엑셀 파일이 아닙니다.");
+							return false;
+						}
+					}
+				</script>
 			</div>
 		</div>
 		</div>
