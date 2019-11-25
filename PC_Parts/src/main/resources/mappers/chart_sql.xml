@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Chart">
+
+
+	<select id="gerRequestSup" resultType="com.pc.parts.dto.ChartSupRequestDTO" parameterType="java.lang.String" >
+		 <![CDATA[ SELECT distinct logPid as pid,product.name,logCo as co,(logNew-logOld) as cnt FROM log ,product where (logNew-logOld) > 0 and logCo = #{co} and logPid=pid]]>
+	</select>
+	
+	
+
+</mapper>

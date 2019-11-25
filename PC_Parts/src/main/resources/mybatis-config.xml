@@ -19,6 +19,7 @@
 		<typeAlias type="com.pc.parts.dto.CompanyDTO"></typeAlias>
 		<typeAlias type="com.pc.parts.dto.SuppleDTO"></typeAlias>
 		<typeAlias type="com.pc.parts.dto.NotiCmtDTO"></typeAlias>
+		<typeAlias type="com.pc.parts.dto.ChartSupRequestDTO"></typeAlias>
 	</typeAliases>
 
 

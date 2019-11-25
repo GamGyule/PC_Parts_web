@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.common.collect.Iterators;
+import com.google.gson.Gson;
+import com.pc.parts.dao.ChartDAOMybatis;
 import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiCmtDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
@@ -52,6 +53,9 @@ public class HomeController {
 
 	@Inject
 	NotiCmtDAOMyBatis notiCmtDao;
+	
+	@Inject
+	ChartDAOMybatis chartdao;
 
 	public boolean LoginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -373,13 +377,15 @@ public class HomeController {
 		return "chart";
 	}
 	
-	@RequestMapping("/getChart")
+	@ResponseBody
+	@RequestMapping(value = "/getChart", produces = "application/json; charset=utf8")
 	public String getChart(HttpServletRequest req) {
-		ArrayList<ChartSupRequestDTO> list = new ArrayList<>();
+		List<ChartSupRequestDTO> list = chartdao.getRequestChart("BBBB");
 		
+		Gson gson = new Gson();
 		
+		String data = gson.toJson(list);
 		
-		
-		return null;
+		return data;
 	}
 }
