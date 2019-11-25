@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chart">
+
+
+	<select id="chartUpdateLog" resultType="com.pc.parts.dto.CompanyDTO" parameterType="java.lang.String" >
+		SELECT logPid,logCo,(logNew-logOld) FROM compuzone.log where (logNew-logOld) > 0 and logCo = #{idx};
+		
+	</select>
+	
+	
+
+</mapper>
