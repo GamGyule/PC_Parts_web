@@ -73,5 +73,17 @@
     <select id="SuppleSelectLow" resultType="java.lang.Integer">
         <![CDATA[ select count(*) from product where count <= 5]]>
     </select>
+    
+    <insert id="SuppleExcelInsert" parameterType="map">
+		insert into product values(
+		#{idx},
+		#{pid},
+		#{co},
+		#{name},
+		#{info},
+		#{price},
+		#{count}
+		)
+	</insert>
 
 </mapper>

@@ -29,6 +29,7 @@ import com.pc.parts.dao.CompanyDAOMyBatis;
 import com.pc.parts.dao.NotiCmtDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
 import com.pc.parts.dao.SuppleDAOMybatis;
+import com.pc.parts.dto.ChartSupRequestDTO;
 import com.pc.parts.dto.CompanyDTO;
 import com.pc.parts.dto.NotiCmtDTO;
 import com.pc.parts.dto.NotiDTO;
@@ -365,5 +366,20 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		return "redirect:/supple";
+	}
+	
+	@RequestMapping("/chart")
+	public String chartView(HttpServletRequest request) {
+		return "chart";
+	}
+	
+	@RequestMapping("/getChart")
+	public String getChart(HttpServletRequest req) {
+		ArrayList<ChartSupRequestDTO> list = new ArrayList<>();
+		
+		
+		
+		
+		return null;
 	}
 }

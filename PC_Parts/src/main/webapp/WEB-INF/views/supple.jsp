@@ -268,7 +268,7 @@ li:hover {
 				<a href="./home"><li>홈</li></a>
 				<a href="./supple"><li class="tab-select">재고 관리</li></a>
 				<a href="javascript:;"><li>입·출고 관리</li></a>
-				<a href="javascript:;"><li>통계 관리</li></a>
+				<a href="./chart"><li>통계 관리</li></a>
 				<a href="./noti"><li>재고 요청</li></a>
 			</ul>
 		</div>
