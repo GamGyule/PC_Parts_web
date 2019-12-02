@@ -11,6 +11,7 @@ public class LogDTO {
 	private int logNew;
 	private String logCo;
 	SimpleDateFormat dateset = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public int getLogNum() {
 		return logNum;
 	}

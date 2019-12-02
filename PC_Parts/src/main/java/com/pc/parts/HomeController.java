@@ -400,7 +400,6 @@ public class HomeController {
 		List<ChartSupRequestDTO> list = chartdao.getRequestChart(co);
 		
 		Gson gson = new Gson();
-		
 		String data = gson.toJson(list);
 		
 		return data;
