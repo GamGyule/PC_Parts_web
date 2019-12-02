@@ -375,6 +375,7 @@ public class HomeController {
 	@RequestMapping("/chart")
 	public String chartView(HttpServletRequest request) {
 		return "chart";
+		
 	}
 	
 	@ResponseBody
