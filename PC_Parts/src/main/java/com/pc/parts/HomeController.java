@@ -27,11 +27,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.pc.parts.dao.ChartDAOMybatis;
 import com.pc.parts.dao.CompanyDAOMyBatis;
+import com.pc.parts.dao.LogDAOMybatis;
 import com.pc.parts.dao.NotiCmtDAOMyBatis;
 import com.pc.parts.dao.NotiDAOMyBatis;
 import com.pc.parts.dao.SuppleDAOMybatis;
 import com.pc.parts.dto.ChartSupRequestDTO;
 import com.pc.parts.dto.CompanyDTO;
+import com.pc.parts.dto.LogDTO;
 import com.pc.parts.dto.NotiCmtDTO;
 import com.pc.parts.dto.NotiDTO;
 import com.pc.parts.dto.SuppleDTO;
@@ -56,6 +58,9 @@ public class HomeController {
 	
 	@Inject
 	ChartDAOMybatis chartdao;
+	
+	@Inject
+	LogDAOMybatis logdao;
 
 	public boolean LoginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -294,6 +299,16 @@ public class HomeController {
 		model.addAttribute("notiCmtCount", cmtList);
 		return "noti";
 	}
+	@RequestMapping("/log")
+	public String Log(Model model) {
+		
+		List<LogDTO> Log_list = (List<LogDTO>) logdao.SelectLog();
+		model.addAttribute("Log_list",Log_list);
+		LogDTO log = Log_list.get(0);
+		System.out.println(log.getLogCo());
+		return "log";
+		
+	}
 
 	@RequestMapping("/supRequestPage")
 	public String SupRequestPage(Model model, HttpServletRequest req) {
@@ -375,6 +390,7 @@ public class HomeController {
 	@RequestMapping("/chart")
 	public String chartView(HttpServletRequest request) {
 		return "chart";
+		
 	}
 	
 	@ResponseBody
