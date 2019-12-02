@@ -380,7 +380,8 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value = "/getChart", produces = "application/json; charset=utf8")
 	public String getChart(HttpServletRequest req) {
-		List<ChartSupRequestDTO> list = chartdao.getRequestChart("BBBB");
+		String co = req.getParameter("co");
+		List<ChartSupRequestDTO> list = chartdao.getRequestChart(co);
 		
 		Gson gson = new Gson();
 		

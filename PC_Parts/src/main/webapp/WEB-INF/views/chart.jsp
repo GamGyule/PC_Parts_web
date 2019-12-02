@@ -8,7 +8,9 @@
 <script src="<%=request.getContextPath()%>/js/sort.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto&display=swap" rel="stylesheet">
 <style>
 html, body {
@@ -63,12 +65,6 @@ li:hover {
 	-webkit-transform: scale(.95);
 }
 
-.hex-outer {
-	background: #fdcb6e;
-	width: 110px;
-	height: 64px;
-}
-
 .h1 {
 	position: absolute;
 }
@@ -118,16 +114,81 @@ li:hover {
 			</ul>
 		</div>
 		<div style="overflow: hidden;padding-left: 10px;">
-			<p>asdasdasd</p>
+			<p>회사</p>
+			<select onchange="reqChart(this)">
+			<option selected>선택</option>
+			<option>AAAA</option>
+			<option>BBBB</option>
+			</select>
 			<div id="chartMain">
-				<a href="/getChart">adsasdasd</a>
+				<canvas id="myChart"></canvas>
 			</div>
 		</div>
-		
 		<script>
+		function reqChart(my){
 			var chart = new Vue({
-				el:"#chartMain"
+				el:"#chartMain",
+				data:{
+					label:""
+				},
+				methods:{
+					getData:function(){
+						var vm = this;
+						axios.get("/getChart?co="+my.value)
+						.then(res=>{
+							vm.viewChart(res.data);
+						}).catch(err=>{
+							console.log(err);
+						})
+					},
+					viewChart:function(data){
+						var pdCnt = new Array();
+						var pdName = new Array();
+						for(var i in data){
+							pdCnt.push(data[i].cnt);
+							pdName.push(data[i].name + "(" + data[i].pid + ")");
+						}
+						var ctx = document.getElementById('myChart').getContext('2d');
+						var myPieChart = new Chart(ctx, {
+						    type: 'pie',
+						    data: {
+						    	labels: pdName,
+						    	datasets: [{
+						        	data: pdCnt,
+						        	backgroundColor: poolColors(pdCnt.length)
+						    	}]},
+						    options:{
+						    	plugins:{
+							    	datalabels:{
+							            font: {
+							              size: 30
+							            }
+							    	}
+							    }
+						    }
+						});
+					}
+				},
+				mounted:function(){
+			        this.$nextTick(function() {
+			        	this.getData();
+			        })
+				}
 			})
+		}
+		function dynamicColors() {
+		    var r = Math.floor(Math.random() * 255);
+		    var g = Math.floor(Math.random() * 255);
+		    var b = Math.floor(Math.random() * 255);
+		    return "rgba(" + r + "," + g + "," + b + ", 0.5)";
+		}
+		function poolColors(a) {
+		    var pool = [];
+		    for(i = 0; i < a; i++) {
+		        pool.push(dynamicColors());
+		    }
+		    return pool;
+		}
 		</script>
 	</div>
 	</body>
