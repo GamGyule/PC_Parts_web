@@ -120,7 +120,7 @@ li:hover {
 			<option>AAAA</option>
 			<option>BBBB</option>
 			</select>
-			<div id="chartMain">
+			<div id="chartMain" style="width:800px;">
 				<canvas id="myChart"></canvas>
 			</div>
 		</div>

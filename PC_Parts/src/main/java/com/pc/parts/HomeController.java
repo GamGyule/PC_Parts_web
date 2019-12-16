@@ -180,7 +180,7 @@ public class HomeController {
 		if (result < 1) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('요청하는 재고가 너무 많습니다.');history.back();</script>");
+			out.println("<script>alert('재고보다 많이 요청함.');history.back();</script>");
 			out.flush();
 			return;
 		} else {
@@ -195,7 +195,7 @@ public class HomeController {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('요청하였습니다.');window.close();</script>");
+			out.println("<script>alert('요청 성공');window.close();</script>");
 			out.flush();
 			return;
 		}
