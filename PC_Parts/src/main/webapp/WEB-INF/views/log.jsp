@@ -370,8 +370,8 @@ li:hover {
 		<div style="float: left; height: 100%; display: inline-block;">
 			<ul style="list-style: none; padding: 0px; margin: 0px;; height: 1200px;">
 				<a href="./home"><li>홈</li></a>
-				<a href="./supple"><li class="tab-select">재고 관리</li></a>
-				<a href="./log"><li>입·출고 관리</li></a>
+				<a href="./supple"><li>재고 관리</li></a>
+				<a href="./log"><li class="tab-select">입·출고 관리</li></a>
 				<a href="./chart"><li>통계 관리</li></a>
 				<a href="./noti"><li>재고 요청</li></a>
 			</ul>

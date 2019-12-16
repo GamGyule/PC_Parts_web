@@ -7,6 +7,7 @@ import com.pc.parts.dto.SuppleDTO;
 
 public interface SuppleDAO {
 	public List<SuppleDTO> selectSupple(String page);
+	public List<SuppleDTO> selectLowSupple(String page);
 	public int AllSuppleCnt();
 
 	public int NameSuppleCnt(String name);

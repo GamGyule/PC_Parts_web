@@ -180,7 +180,7 @@ public class HomeController {
 		if (result < 1) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('요청하는 재고가 너무 많습니다.');history.back();</script>");
+			out.println("<script>alert('�슂泥��븯�뒗 �옱怨좉� �꼫臾� 留롮뒿�땲�떎.');history.back();</script>");
 			out.flush();
 			return;
 		} else {
@@ -195,7 +195,7 @@ public class HomeController {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('요청하였습니다.');window.close();</script>");
+			out.println("<script>alert('�슂泥��븯���뒿�땲�떎.');window.close();</script>");
 			out.flush();
 			return;
 		}
@@ -272,6 +272,80 @@ public class HomeController {
 		int SuppleCnt = supdao.AllSuppleCnt();
 		model.addAttribute("SuppleCnt", SuppleCnt);
 		return "supple";
+
+	}
+	
+	@RequestMapping("/suppleLowAction")
+	public String ProductLowManaging(Model model, HttpServletRequest request) {
+		if (!LoginCheck(request)) {
+			return "login";
+		}
+
+		if (request.getParameter("searchCompany") != null && request.getParameter("searchName") != null) {
+
+			String co = request.getParameter("searchCompany");
+			String name = request.getParameter("searchName");
+
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCoName(co, name, page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCoName(co, name, "1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.CoNameSuppleCnt(co, name);
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
+
+		} else if (request.getParameter("searchCompany") != null && request.getParameter("searchName") == null) {
+
+			String co = request.getParameter("searchCompany");
+
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co, page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleCo(co, "1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.CoSuppleCnt(co);
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
+
+		} else if (request.getParameter("searchCompany") == null && request.getParameter("searchName") != null) {
+
+			String name = request.getParameter("searchName");
+
+			if (request.getParameter("page") != null) {
+				String page = request.getParameter("page");
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name, page);
+				model.addAttribute("list", Supple_list);
+			} else {
+				List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectSuppleName(name, "1");
+				model.addAttribute("list", Supple_list);
+			}
+
+			int SuppleCnt = supdao.NameSuppleCnt(name);
+			model.addAttribute("SuppleCnt", SuppleCnt);
+			return "supple";
+		}
+
+		if (request.getParameter("page") != null) {
+			String page = request.getParameter("page");
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectLowSupple(page);
+			model.addAttribute("list", Supple_list);
+		} else {
+			List<SuppleDTO> Supple_list = (List<SuppleDTO>) supdao.selectLowSupple("1");
+			model.addAttribute("list", Supple_list);
+		}
+
+		int SuppleCnt = supdao.AllSuppleCnt();
+		model.addAttribute("SuppleCnt", SuppleCnt);
+		return "suppleLowAction";
 
 	}
 

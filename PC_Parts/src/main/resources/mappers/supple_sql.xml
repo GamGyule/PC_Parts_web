@@ -18,7 +18,9 @@
         <![CDATA[ select * from product limit #{page}, 20]]>
     </select>
     
-    
+    	<select id="SuppleLowSelectAll" resultType="com.pc.parts.dto.SuppleDTO">
+        <![CDATA[ select * from product where count <= 5 limit #{page}, 20 ]]>
+    </select>
     
      <select id="NameSuppleCnt" resultType="java.lang.Integer" parameterType="map">
         select count(*) from product where name like '%${name}%'

@@ -150,19 +150,19 @@ li:hover {
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=noti_cnt %></a></span></div>
+				<div class="label"><span style="font-size:20px;">받은 요청<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="./noti"><%=noti_cnt %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;"><%=supLow_cnt %></a></span></div>
+				<div class="label"><span style="font-size:20px;">재고 부족<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="./supple"><%=supLow_cnt %></a></span></div>
 			</div>
 			<div class="frame">
 				<div class="hex-outer h1"></div>
 				<div class="hex-outer h2"></div>
 				<div class="hex-outer h3"></div>
-				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="javascript:;">2</a></span></div>
+				<div class="label"><span style="font-size:20px;">판매<br><a class="noti-cnt" style="text-decoration: none;color:white;" href="./chart">2</a></span></div>
 			</div>
 		</div>
 		

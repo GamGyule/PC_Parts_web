@@ -148,6 +148,11 @@ public class SuppleDAOMybatis implements SuppleDAO {
 		sqlSession.insert("Supple.SuppleExcelInsert",map);
 		
 	}
+	@Override
+	public List<SuppleDTO> selectLowSupple(String spage) {
+		int page = (Integer.parseInt(spage)-1)*20;
+		return sqlSession.selectList("Supple.SuppleLowSelectAll",page);
+	}
 
 
 	
