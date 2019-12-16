@@ -180,7 +180,7 @@ public class HomeController {
 		if (result < 1) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('�슂泥��븯�뒗 �옱怨좉� �꼫臾� 留롮뒿�땲�떎.');history.back();</script>");
+			out.println("<script>alert('재고보다 많이 요청함.');history.back();</script>");
 			out.flush();
 			return;
 		} else {
@@ -195,7 +195,8 @@ public class HomeController {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('�슂泥��븯���뒿�땲�떎.');window.close();</script>");
+
+			out.println("<script>alert('요청 성공');window.close();</script>");
 			out.flush();
 			return;
 		}
